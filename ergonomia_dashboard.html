@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRE-BA | Dashboard Ergonomia Interior</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1c2333;
+    --border: rgba(255,255,255,0.07);
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --cyan: #22d3ee;
+    --purple: #a78bfa;
+    --pink: #f472b6;
+    --green: #4ade80;
+    --orange: #fb923c;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --blue: #60a5fa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Sora',sans-serif; min-height:100vh; overflow-x:hidden; }
+
+  /* GRID NOISE OVERLAY */
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image: radial-gradient(ellipse at 20% 50%, rgba(34,211,238,0.04) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 20%, rgba(167,139,250,0.05) 0%, transparent 55%),
+                      radial-gradient(ellipse at 60% 80%, rgba(244,114,182,0.04) 0%, transparent 50%);
+  }
+
+  .wrapper { position:relative; z-index:1; max-width:1600px; margin:0 auto; padding:24px; }
+
+  /* HEADER */
+  header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+  .logo-area { display:flex; align-items:center; gap:14px; }
+  .logo-badge {
+    width:46px; height:46px; border-radius:12px;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:18px; color:#0a0e1a;
+  }
+  .logo-text h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; }
+  .logo-text p { font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .header-right { display:flex; align-items:center; gap:10px; }
+  .tag { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; letter-spacing:0.5px; }
+  .tag-cyan { background:rgba(34,211,238,0.12); color:var(--cyan); border:1px solid rgba(34,211,238,0.2); }
+  .tag-purple { background:rgba(167,139,250,0.12); color:var(--purple); border:1px solid rgba(167,139,250,0.2); }
+  #live-count { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--green); }
+
+  /* KPI CARDS */
+  .kpi-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:24px; }
+  .kpi-card {
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:16px; padding:20px 18px; position:relative; overflow:hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor:default;
+  }
+  .kpi-card:hover { transform:translateY(-3px); }
+  .kpi-card::after {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background: var(--accent);
+  }
+  .kpi-card[data-accent="cyan"]  { --accent: linear-gradient(90deg,var(--cyan),var(--blue)); }
+  .kpi-card[data-accent="purple"]{ --accent: linear-gradient(90deg,var(--purple),var(--pink)); }
+  .kpi-card[data-accent="green"] { --accent: linear-gradient(90deg,var(--green),var(--cyan)); }
+  .kpi-card[data-accent="orange"]{ --accent: linear-gradient(90deg,var(--orange),var(--yellow)); }
+  .kpi-card[data-accent="pink"]  { --accent: linear-gradient(90deg,var(--pink),var(--purple)); }
+  .kpi-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:10px; }
+  .kpi-value { font-size:36px; font-weight:800; line-height:1; font-family:'JetBrains Mono',monospace; letter-spacing:-1px; }
+  .kpi-value span { font-size:14px; font-weight:400; color:var(--muted); margin-left:4px; }
+  .kpi-sub { font-size:11px; color:var(--muted); margin-top:8px; }
+
+  /* MAIN GRID */
+  .main-grid { display:grid; grid-template-columns:1fr 380px; gap:18px; margin-bottom:18px; }
+
+  /* CARDS */
+  .card {
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:16px; padding:22px; overflow:hidden;
+  }
+  .card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+  .card-title { font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+  .card-badge { padding:3px 10px; border-radius:10px; font-size:10px; font-weight:700; }
+
+  /* BAR CHARTS */
+  .bar-item { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .bar-label { font-size:11px; color:var(--text); width:220px; flex-shrink:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-track { flex:1; height:8px; background:rgba(255,255,255,0.05); border-radius:4px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; transition: width 1s cubic-bezier(.4,0,.2,1); }
+  .bar-val { font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--muted); width:32px; text-align:right; }
+  .bar-pct { font-size:10px; color:var(--muted); width:38px; text-align:right; }
+
+  /* DONUT */
+  .donut-wrap { display:flex; align-items:center; gap:20px; }
+  .donut-svg { flex-shrink:0; }
+  .donut-legend { flex:1; }
+  .legend-item { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .legend-label { font-size:11px; color:var(--text); flex:1; }
+  .legend-val { font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--muted); }
+
+  /* TABLE */
+  .data-table { width:100%; border-collapse:collapse; }
+  .data-table th {
+    font-size:10px; text-transform:uppercase; letter-spacing:1px;
+    color:var(--muted); font-weight:600; padding:8px 10px;
+    border-bottom:1px solid var(--border); text-align:left;
+  }
+  .data-table td {
+    font-size:12px; padding:9px 10px;
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    vertical-align:middle;
+  }
+  .data-table tr:hover td { background:rgba(255,255,255,0.02); }
+  .zona-badge {
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:36px; padding:2px 8px; border-radius:6px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+    background:rgba(34,211,238,0.1); color:var(--cyan); border:1px solid rgba(34,211,238,0.2);
+  }
+  .city-name { font-weight:500; font-size:12px; }
+  .multi-badge {
+    font-size:9px; padding:2px 6px; border-radius:6px;
+    background:rgba(167,139,250,0.15); color:var(--purple);
+    border:1px solid rgba(167,139,250,0.2); margin-left:5px;
+  }
+  .total-pill {
+    display:inline-block; padding:2px 8px; border-radius:8px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+  }
+
+  /* CITY MINI BARS */
+  .city-bar { display:flex; align-items:center; gap:6px; }
+  .city-bar-track { width:60px; height:5px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden; }
+  .city-bar-fill { height:100%; border-radius:3px; background: linear-gradient(90deg,var(--purple),var(--pink)); }
+
+  /* BOTTOM GRID */
+  .bottom-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+
+  /* FORM */
+  .form-card {
+    background: linear-gradient(135deg, rgba(34,211,238,0.05), rgba(167,139,250,0.05));
+    border:1px solid rgba(34,211,238,0.15); border-radius:16px; padding:24px;
+  }
+  .form-title { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+  .form-sub { font-size:11px; color:var(--muted); margin-bottom:20px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .form-group { display:flex; flex-direction:column; gap:5px; }
+  .form-group.full { grid-column:1/-1; }
+  .form-group label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px; font-weight:600; }
+  .form-group input, .form-group select {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px; padding:9px 12px; color:var(--text); font-family:'Sora',sans-serif;
+    font-size:12px; transition:border-color 0.2s, background 0.2s;
+    appearance:none;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline:none; border-color:var(--cyan); background:rgba(34,211,238,0.05);
+  }
+  .form-group input::placeholder { color:var(--muted); }
+  .form-group select option { background:#1c2333; }
+
+  .eq-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px; }
+  .eq-field { display:flex; flex-direction:column; gap:4px; }
+  .eq-field label { font-size:9px; color:var(--muted); line-height:1.3; }
+  .eq-field input {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    border-radius:6px; padding:7px 10px; color:var(--text);
+    font-family:'JetBrains Mono',monospace; font-size:12px; text-align:center;
+    transition:border-color 0.2s;
+  }
+  .eq-field input:focus { outline:none; border-color:var(--cyan); background:rgba(34,211,238,0.05); }
+
+  .btn-submit {
+    width:100%; padding:12px; border-radius:10px; border:none; cursor:pointer;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    color:#0a0e1a; font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:0.5px; transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { opacity:0.9; transform:translateY(-1px); }
+  .btn-submit:active { transform:translateY(0); }
+
+  .toast {
+    position:fixed; bottom:24px; right:24px; z-index:999;
+    background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(74,222,128,0.15));
+    border:1px solid rgba(34,211,238,0.3); border-radius:12px;
+    padding:14px 20px; font-size:13px; font-weight:600; color:var(--green);
+    transform:translateY(80px); opacity:0; transition: all 0.4s cubic-bezier(.4,0,.2,1);
+    backdrop-filter:blur(12px);
+  }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* FILTER PILLS */
+  .filter-bar { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; align-items:center; }
+  .filter-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-right:4px; }
+  .filter-pill {
+    padding:5px 14px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;
+    border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03);
+    color:var(--muted); transition: all 0.2s;
+  }
+  .filter-pill.active {
+    background:rgba(34,211,238,0.12); color:var(--cyan);
+    border-color:rgba(34,211,238,0.3);
+  }
+  .search-box {
+    margin-left:auto; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px; padding:5px 14px; font-family:'Sora',sans-serif; font-size:11px;
+    color:var(--text); outline:none;
+  }
+  .search-box:focus { border-color:rgba(34,211,238,0.3); }
+  .search-box::placeholder { color:var(--muted); }
+
+  /* SCROLLABLE TABLE */
+  .table-scroll { max-height:360px; overflow-y:auto; }
+  .table-scroll::-webkit-scrollbar { width:4px; }
+  .table-scroll::-webkit-scrollbar-track { background:transparent; }
+  .table-scroll::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:2px; }
+
+  /* HEATMAP */
+  .heatmap-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .heat-cell {
+    aspect-ratio:1; border-radius:4px; cursor:pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    position:relative;
+  }
+  .heat-cell:hover { transform:scale(1.1); z-index:10; }
+  .heat-cell::after {
+    content: attr(data-tip);
+    position:absolute; bottom:110%; left:50%; transform:translateX(-50%);
+    background:#1c2333; border:1px solid var(--border); border-radius:6px;
+    padding:4px 8px; font-size:10px; white-space:nowrap; pointer-events:none;
+    opacity:0; transition:opacity 0.2s;
+  }
+  .heat-cell:hover::after { opacity:1; }
+
+  /* SPARKLINES */
+  .spark-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .spark-label { font-size:11px; width:130px; flex-shrink:0; }
+  .spark-bar-wrap { flex:1; height:20px; position:relative; }
+  .spark-seg { position:absolute; top:0; height:100%; border-radius:3px; transition: width 0.8s; }
+  .spark-total { font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--muted); width:28px; text-align:right; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  .card { animation: fadeIn 0.5s ease both; }
+  .kpi-card { animation: fadeIn 0.5s ease both; }
+  .kpi-card:nth-child(1){animation-delay:0.05s}
+  .kpi-card:nth-child(2){animation-delay:0.10s}
+  .kpi-card:nth-child(3){animation-delay:0.15s}
+  .kpi-card:nth-child(4){animation-delay:0.20s}
+  .kpi-card:nth-child(5){animation-delay:0.25s}
+
+  @media(max-width:1100px){ .main-grid{grid-template-columns:1fr;} }
+  @media(max-width:800px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} .bottom-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-badge">TR</div>
+      <div class="logo-text">
+        <h1>Dashboard de Ergonomia Interior</h1>
+        <p>TRE-BA · SEGEP/COMAP/SGA · NR-17 / Lei 13.146/2015</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="tag tag-cyan">68 ZONAS</span>
+      <span class="tag tag-purple">NR-17</span>
+      <span id="live-count">● DADOS AO VIVO</span>
+    </div>
+  </header>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid" id="kpi-grid">
+    <div class="kpi-card" data-accent="cyan">
+      <div class="kpi-label">Zonas Levantadas</div>
+      <div class="kpi-value" id="kpi-zonas">68</div>
+      <div class="kpi-sub">cartórios mapeados</div>
+    </div>
+    <div class="kpi-card" data-accent="purple">
+      <div class="kpi-label">Cidades Atendidas</div>
+      <div class="kpi-value" id="kpi-cidades">—</div>
+      <div class="kpi-sub">municípios cobertos</div>
+    </div>
+    <div class="kpi-card" data-accent="green">
+      <div class="kpi-label">Total de Itens</div>
+      <div class="kpi-value" id="kpi-total">—</div>
+      <div class="kpi-sub">equipamentos necessários</div>
+    </div>
+    <div class="kpi-card" data-accent="orange">
+      <div class="kpi-label">Item Mais Demandado</div>
+      <div class="kpi-value" id="kpi-top-val">—</div>
+      <div class="kpi-sub" id="kpi-top-name">—</div>
+    </div>
+    <div class="kpi-card" data-accent="pink">
+      <div class="kpi-label">Cidades Multizona</div>
+      <div class="kpi-value" id="kpi-multi">—</div>
+      <div class="kpi-sub">com 2+ cartórios</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filter-bar">
+    <span class="filter-label">Filtrar:</span>
+    <span class="filter-pill active" data-filter="all">Todas as cidades</span>
+    <input class="search-box" id="search-box" placeholder="🔍 Buscar zona ou cidade..." type="text">
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- EQUIPMENT RANKING -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Ranking de Equipamentos</span>
+        <span class="card-badge" style="background:rgba(34,211,238,0.1);color:var(--cyan)">13 tipos</span>
+      </div>
+      <div id="eq-bars"></div>
+    </div>
+
+    <!-- DONUT: TOP CITIES -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Top Cidades</span>
+        <span class="card-badge" style="background:rgba(167,139,250,0.1);color:var(--purple)" id="city-count-badge">—</span>
+      </div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="18"/>
+          <g id="donut-arcs" transform="rotate(-90 65 65)"></g>
+          <text x="65" y="60" text-anchor="middle" fill="#e2e8f0" font-size="20" font-weight="800" font-family="JetBrains Mono" id="donut-center-val">—</text>
+          <text x="65" y="76" text-anchor="middle" fill="#64748b" font-size="9" font-family="Sora">itens</text>
+        </svg>
+        <div class="donut-legend" id="donut-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM GRID -->
+  <div class="bottom-grid">
+
+    <!-- ZONE TABLE -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="padding:18px 20px 12px; border-bottom:1px solid var(--border)">
+        <div class="card-header" style="margin:0">
+          <span class="card-title">Detalhamento por Zona</span>
+          <span class="card-badge" style="background:rgba(74,222,128,0.1);color:var(--green)" id="row-count-badge">68 zonas</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Zona</th>
+              <th>Cidade</th>
+              <th>Equipamentos</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="zone-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card">
+      <div class="form-title" style="color:var(--cyan)">➕ Nova Zona / Cartório</div>
+      <div class="form-sub">Preencha os dados e clique em Inserir. O dashboard atualiza automaticamente.</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nº da Zona *</label>
+          <input type="number" id="f-zona" placeholder="Ex: 205" min="1">
+        </div>
+        <div class="form-group">
+          <label>Cidade *</label>
+          <input type="text" id="f-cidade" placeholder="Ex: SALVADOR" list="city-list" autocomplete="off">
+          <datalist id="city-list"></datalist>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:10px;">Quantidades por Equipamento</div>
+      <div class="eq-grid" id="eq-form-grid"></div>
+      <button class="btn-submit" onclick="insertZone()">INSERIR ZONA NO DASHBOARD</button>
+    </div>
+  </div>
+
+  <!-- HEATMAP + CITY TABLE -->
+  <div class="bottom-grid">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Mapa de Calor — Equipamentos × Cidades</span>
+        <span class="card-badge" style="background:rgba(251,146,60,0.1);color:var(--orange)">TOP 7 CIDADES</span>
+      </div>
+      <div id="heatmap-area"></div>
+    </div>
+
+    <!-- CITY AGGREGATED TABLE -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="padding:18px 20px 12px; border-bottom:1px solid var(--border)">
+        <div class="card-header" style="margin:0">
+          <span class="card-title">Consolidado por Cidade</span>
+          <span class="card-badge" style="background:rgba(251,191,36,0.1);color:var(--yellow)">AGRUPADO</span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Cidade</th>
+              <th>Zonas</th>
+              <th>Total</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody id="city-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">✓ Zona inserida! Dashboard atualizado.</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const EQ_NAMES = [
+  "Monitor c/ ajuste altura","Base suporte monitor","Suporte monitor articulado",
+  "Apoio para teclado","Mouse Pad","Mesa em L","Mesa retangular",
+  "Cadeira Executiva","Apoio para os pés","Suporte lombar","Cadeira fixa",
+  "Mouse Ergonômico","Suporte para Notebook"
+];
+
+const EQ_NAMES_FULL = [
+  "Monitor de vídeo com ajuste de altura da tela",
+  "Base de suporte elevatório para monitor de vídeo",
+  "Suporte de monitor de vídeo articulado",
+  "Apoio para teclado","Mouse Pad","Mesa em L","Mesa retangular",
+  "Cadeira Executiva","Apoio para os pés","Suporte de apoio lombar",
+  "Cadeira fixa","Mouse Ergonômico","Suporte para Notebook"
+];
+
+let DB = [{"seq": 1, "zona": 22, "cidade": "JEQUIE", "equip": [0, 6, 0, 0, 0, 0, 1, 6, 4, 0, 4, 0, 0]}, {"seq": 2, "zona": 23, "cidade": "JEQUIE", "equip": [0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0]}, {"seq": 3, "zona": 147, "cidade": "ITAJIBA", "equip": [0, 1, 0, 0, 0, 0, 0, 5, 2, 0, 0, 0, 1]}, {"seq": 4, "zona": 39, "cidade": "VITORIA DA CONQUISTA", "equip": [0, 4, 0, 0, 0, 2, 4, 0, 7, 0, 0, 0, 1]}, {"seq": 5, "zona": 40, "cidade": "VITORIA DA CONQUISTA", "equip": [0, 0, 0, 0, 0, 3, 0, 0, 4, 0, 0, 0, 1]}, {"seq": 6, "zona": 41, "cidade": "VITORIA DA CONQUISTA", "equip": [0, 1, 0, 0, 0, 1, 2, 1, 12, 0, 0, 0, 1]}, {"seq": 7, "zona": 161, "cidade": "ANAGÉ", "equip": [0, 0, 0, 0, 0, 3, 0, 4, 1, 0, 3, 0, 1]}, {"seq": 8, "zona": 88, "cidade": "SEABRA", "equip": [0, 1, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 1]}, {"seq": 9, "zona": 101, "cidade": "LIVRAMENTO NOSSA SENHORA", "equip": [0, 4, 0, 0, 0, 5, 0, 6, 0, 0, 0, 0, 1]}, {"seq": 10, "zona": 105, "cidade": "PIATÃ", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]}, {"seq": 11, "zona": 65, "cidade": "MACAUBAS", "equip": [0, 0, 0, 0, 0, 4, 0, 3, 0, 0, 0, 0, 0]}, {"seq": 12, "zona": 111, "cidade": "PARAMIRIM", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"seq": 13, "zona": 89, "cidade": "LENÇOIS", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"seq": 14, "zona": 176, "cidade": "BARRA DO MENDES", "equip": [0, 1, 0, 0, 0, 1, 3, 1, 1, 0, 0, 0, 0]}, {"seq": 15, "zona": 174, "cidade": "CANARANA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]}, {"seq": 16, "zona": 46, "cidade": "JACOBINA", "equip": [0, 0, 0, 0, 0, 5, 0, 4, 2, 1, 0, 0, 0]}, {"seq": 17, "zona": 167, "cidade": "JACOBINA", "equip": [0, 1, 0, 0, 0, 4, 0, 1, 3, 0, 0, 0, 0]}, {"seq": 18, "zona": 36, "cidade": "AMARGOSA", "equip": [0, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 1]}, {"seq": 19, "zona": 160, "cidade": "SANTA BARBARA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]}, {"seq": 20, "zona": 110, "cidade": "RIBEIRA DO POMBAL", "equip": [0, 0, 0, 0, 0, 1, 0, 1, 3, 0, 3, 0, 1]}, {"seq": 21, "zona": 163, "cidade": "ALAGOINHAS", "equip": [0, 0, 1, 0, 1, 0, 0, 1, 7, 0, 0, 1, 1]}, {"seq": 22, "zona": 94, "cidade": "OLIVEIRA DOS BREJINHOS", "equip": [0, 0, 0, 0, 0, 1, 1, 4, 2, 1, 0, 2, 0]}, {"seq": 23, "zona": 70, "cidade": "BARREIRAS", "equip": [0, 6, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0]}, {"seq": 24, "zona": 135, "cidade": "COARACI", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 0, 0, 1]}, {"seq": 25, "zona": 75, "cidade": "BARREIRAS", "equip": [0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 0, 0, 0]}, {"seq": 26, "zona": 191, "cidade": "CAPIM GROSSO", "equip": [0, 3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1]}, {"seq": 27, "zona": 87, "cidade": "RUY BARBOSA", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1]}, {"seq": 28, "zona": 139, "cidade": "BARRA DO CHOÇA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1]}, {"seq": 29, "zona": 201, "cidade": "ITAMBÉ", "equip": [0, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0]}, {"seq": 30, "zona": 140, "cidade": "ITAPETINGA", "equip": [0, 1, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 1]}, {"seq": 31, "zona": 137, "cidade": "ITORORO", "equip": [0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0]}, {"seq": 32, "zona": 62, "cidade": "IPIRA", "equip": [0, 2, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 1]}, {"seq": 33, "zona": 100, "cidade": "SÃO DESIDERIO", "equip": [0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 1]}, {"seq": 34, "zona": 154, "cidade": "FEIRA DE SANTANA", "equip": [0, 5, 0, 0, 0, 0, 0, 4, 4, 2, 0, 0, 0]}, {"seq": 35, "zona": 155, "cidade": "FEIRA DE SANTANA", "equip": [0, 9, 0, 0, 0, 0, 0, 2, 10, 0, 0, 3, 0]}, {"seq": 36, "zona": 156, "cidade": "FEIRA DE SANTANA", "equip": [0, 0, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0]}, {"seq": 37, "zona": 90, "cidade": "BRUMADO", "equip": [0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1]}, {"seq": 38, "zona": 49, "cidade": "RIO REAL", "equip": [0, 3, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1]}, {"seq": 39, "zona": 52, "cidade": "PARAPIRANGA", "equip": [0, 1, 0, 0, 0, 1, 1, 5, 4, 0, 5, 0, 2]}, {"seq": 40, "zona": 158, "cidade": "CHORROCHO", "equip": [0, 2, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0]}, {"seq": 41, "zona": 99, "cidade": "SANTANA", "equip": [0, 3, 0, 0, 0, 3, 1, 3, 0, 0, 0, 0, 0]}, {"seq": 42, "zona": 54, "cidade": "MUNDO NOVO", "equip": [0, 4, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0]}, {"seq": 43, "zona": 136, "cidade": "ITAJUIPE", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]}, {"seq": 44, "zona": 134, "cidade": "UBATA", "equip": [0, 0, 0, 0, 0, 2, 0, 0, 3, 0, 0, 0, 0]}, {"seq": 45, "zona": 73, "cidade": "UBAITABA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]}, {"seq": 46, "zona": 64, "cidade": "GUANAMBI", "equip": [0, 3, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1]}, {"seq": 47, "zona": 173, "cidade": "IBOTIRAMA", "equip": [0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1]}, {"seq": 48, "zona": 198, "cidade": "URUÇUCA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0]}, {"seq": 49, "zona": 72, "cidade": "SANTA MARIA DA VITORIA", "equip": [0, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0, 1]}, {"seq": 50, "zona": 83, "cidade": "UAUA", "equip": [0, 0, 0, 0, 0, 4, 0, 1, 3, 0, 0, 0, 1]}, {"seq": 51, "zona": 166, "cidade": "BUERAREMA", "equip": [0, 0, 1, 0, 0, 4, 0, 2, 1, 1, 0, 0, 1]}, {"seq": 52, "zona": 56, "cidade": "SANTO ANTONIO DE JESUS", "equip": [0, 4, 0, 0, 0, 4, 0, 5, 4, 1, 0, 0, 2]}, {"seq": 53, "zona": 202, "cidade": "SANTO ANTONIO DE JESUS", "equip": [0, 1, 0, 0, 0, 2, 0, 1, 2, 3, 0, 0, 0]}, {"seq": 54, "zona": 0, "cidade": "GANDU", "equip": [0, 2, 0, 0, 0, 3, 0, 0, 4, 0, 0, 0, 1]}, {"seq": 55, "zona": 0, "cidade": "IPIAU", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1]}, {"seq": 56, "zona": 122, "cidade": "PORTO SEGURO", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1]}, {"seq": 57, "zona": 121, "cidade": "PORTO SEGURO", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0]}, {"seq": 58, "zona": 203, "cidade": "EUNAPOLIS", "equip": [0, 0, 0, 0, 0, 3, 0, 3, 1, 1, 0, 0, 0]}, {"seq": 59, "zona": 188, "cidade": "EUNAPOLIS", "equip": [0, 4, 0, 0, 0, 2, 0, 4, 2, 0, 0, 0, 0]}, {"seq": 60, "zona": 0, "cidade": "PRADO", "equip": [0, 1, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1]}, {"seq": 61, "zona": 0, "cidade": "MUCURI", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"seq": 62, "zona": 0, "cidade": "ITABELA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0]}, {"seq": 63, "zona": 25, "cidade": "ILHEUS", "equip": [0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 1]}, {"seq": 64, "zona": 26, "cidade": "ILHEUS", "equip": [0, 3, 0, 0, 0, 1, 2, 0, 1, 1, 0, 0, 1]}, {"seq": 65, "zona": 28, "cidade": "ITABUNA", "equip": [0, 1, 0, 0, 0, 0, 0, 5, 2, 1, 0, 0, 0]}, {"seq": 66, "zona": 27, "cidade": "ITABUNA", "equip": [0, 7, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 1]}, {"seq": 67, "zona": 0, "cidade": "CAMACA", "equip": [0, 1, 0, 0, 0, 5, 1, 5, 0, 0, 0, 0, 0]}, {"seq": 68, "zona": 157, "cidade": "FEIRA DE SANTANA", "equip": [0, 2, 2, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0]}];
+
+const COLORS = ['#22d3ee','#a78bfa','#4ade80','#fb923c','#f472b6','#fbbf24','#60a5fa','#f87171','#34d399','#e879f9','#38bdf8','#a3e635','#ff8c42'];
+
+// ============================================================
+// COMPUTED
+// ============================================================
+function computeStats(db) {
+  const grand = db.reduce((s,r)=>s+r.equip.reduce((a,b)=>a+b,0),0);
+  const cities = {};
+  db.forEach(r=>{
+    if(!cities[r.cidade]) cities[r.cidade]={zonas:[],totals:new Array(13).fill(0)};
+    cities[r.cidade].zonas.push(r.zona);
+    r.equip.forEach((v,i)=>cities[r.cidade].totals[i]+=v);
+  });
+  const eqTotals = new Array(13).fill(0);
+  db.forEach(r=>r.equip.forEach((v,i)=>eqTotals[i]+=v));
+  const topEqIdx = eqTotals.indexOf(Math.max(...eqTotals));
+  const multiZone = Object.values(cities).filter(c=>c.zonas.length>1).length;
+  return {grand, cities, eqTotals, topEqIdx, multiZone, cityCount: Object.keys(cities).length};
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+let activeFilter = 'all';
+let searchTerm = '';
+
+function renderAll() {
+  const filtered = DB.filter(r=>{
+    const matchFilter = activeFilter==='all' || r.cidade===activeFilter;
+    const matchSearch = !searchTerm ||
+      String(r.zona).includes(searchTerm) ||
+      r.cidade.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchFilter && matchSearch;
+  });
+
+  const stats = computeStats(filtered);
+  const allStats = computeStats(DB);
+
+  // KPIs
+  document.getElementById('kpi-zonas').textContent = filtered.length;
+  document.getElementById('kpi-cidades').textContent = stats.cityCount;
+  document.getElementById('kpi-total').textContent = stats.grand.toLocaleString('pt-BR');
+  document.getElementById('kpi-top-val').textContent = stats.eqTotals[stats.topEqIdx] || 0;
+  document.getElementById('kpi-top-name').textContent = EQ_NAMES[stats.topEqIdx] || '—';
+  document.getElementById('kpi-multi').textContent = stats.multiZone;
+
+  // EQ BARS
+  const sortedEq = stats.eqTotals.map((v,i)=>({i,v,name:EQ_NAMES[i]})).sort((a,b)=>b.v-a.v);
+  const maxEq = sortedEq[0]?.v || 1;
+  const eqBarsEl = document.getElementById('eq-bars');
+  eqBarsEl.innerHTML = sortedEq.map(({i,v,name})=>`
+    <div class="bar-item">
+      <span class="bar-label" title="${EQ_NAMES_FULL[i]}">${name}</span>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${(v/maxEq*100).toFixed(1)}%;background:${COLORS[i]};opacity:0.85"></div>
+      </div>
+      <span class="bar-val">${v}</span>
+      <span class="bar-pct">${stats.grand>0?(v/stats.grand*100).toFixed(1):'0.0'}%</span>
+    </div>
+  `).join('');
+
+  // DONUT
+  const cityArr = Object.entries(stats.cities).map(([name,d])=>({name,total:d.totals.reduce((a,b)=>a+b,0)})).sort((a,b)=>b.total-a.total);
+  const top7 = cityArr.slice(0,7);
+  const total7 = top7.reduce((s,c)=>s+c.total,0);
+  document.getElementById('donut-center-val').textContent = stats.grand;
+  document.getElementById('city-count-badge').textContent = `${stats.cityCount} cidades`;
+
+  const R=50, cx=65, cy=65;
+  let startAngle=0;
+  const arcs = top7.map((c,idx)=>{
+    const pct = stats.grand>0 ? c.total/stats.grand : 0;
+    const angle = pct * 2 * Math.PI;
+    const x1 = cx + R*Math.cos(startAngle);
+    const y1 = cy + R*Math.sin(startAngle);
+    const x2 = cx + R*Math.cos(startAngle+angle);
+    const y2 = cy + R*Math.sin(startAngle+angle);
+    const large = angle>Math.PI?1:0;
+    const d = `M ${cx} ${cy} m ${R*Math.cos(startAngle)} ${R*Math.sin(startAngle)} A ${R} ${R} 0 ${large} 1 ${x2-cx+cx} ${y2-cy+cy}`;
+    const path = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${COLORS[idx]}"
+      stroke-width="18" stroke-dasharray="${(pct*Math.PI*2*R).toFixed(2)} ${(Math.PI*2*R).toFixed(2)}"
+      stroke-dashoffset="${(-startAngle*R).toFixed(2)}" opacity="0.85"/>`;
+    startAngle += angle;
+    return {path, city:c.name, total:c.total, pct, color:COLORS[idx]};
+  });
+  document.getElementById('donut-arcs').innerHTML = arcs.map(a=>a.path).join('');
+  document.getElementById('donut-legend').innerHTML = arcs.map(a=>`
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${a.color}"></div>
+      <span class="legend-label">${a.city}</span>
+      <span class="legend-val">${a.total}</span>
+    </div>
+  `).join('');
+
+  // ZONE TABLE
+  const sorted = [...filtered].sort((a,b)=>b.equip.reduce((s,v)=>s+v,0)-a.equip.reduce((s,v)=>s+v,0));
+  const cityZoneCounts = {};
+  DB.forEach(r=>{ if(!cityZoneCounts[r.cidade]) cityZoneCounts[r.cidade]=0; cityZoneCounts[r.cidade]++; });
+
+  document.getElementById('row-count-badge').textContent = `${filtered.length} zonas`;
+  document.getElementById('zone-table-body').innerHTML = sorted.map(r=>{
+    const tot = r.equip.reduce((a,b)=>a+b,0);
+    const isMulti = cityZoneCounts[r.cidade]>1;
+    const color = COLORS[tot>30?0:tot>15?1:tot>8?2:tot>3?3:12];
+    const zonaLabel = r.zona>0 ? `<span class="zona-badge">${r.zona}</span>` : `<span class="zona-badge" style="opacity:0.4">—</span>`;
+    return `<tr>
+      <td>${zonaLabel}</td>
+      <td><span class="city-name">${r.cidade}</span>${isMulti?'<span class="multi-badge">MULTI</span>':''}</td>
+      <td style="max-width:100px">
+        <div style="display:flex;gap:2px;flex-wrap:wrap">
+          ${r.equip.map((v,i)=>v>0?`<span title="${EQ_NAMES[i]}: ${v}" style="width:14px;height:14px;border-radius:3px;background:${COLORS[i]};opacity:0.7;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#000">${v}</span>`:'').join('')}
+        </div>
+      </td>
+      <td><span class="total-pill" style="background:${color}20;color:${color};border:1px solid ${color}40">${tot}</span></td>
+    </tr>`;
+  }).join('');
+
+  // CITY TABLE
+  document.getElementById('city-table-body').innerHTML = cityArr.map((c,idx)=>{
+    const pct = stats.grand>0?(c.total/stats.grand*100).toFixed(1):0;
+    const zonas = stats.cities[c.name].zonas.filter(z=>z>0).join(', ') || '—';
+    const color = COLORS[idx % COLORS.length];
+    return `<tr>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0"></div>
+          <span style="font-size:12px">${c.name}</span>
+        </div>
+      </td>
+      <td style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">${zonas}</td>
+      <td><span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px">${c.total}</span></td>
+      <td>
+        <div class="city-bar">
+          <div class="city-bar-track"><div class="city-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+          <span style="font-size:10px;color:var(--muted)">${pct}%</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  // HEATMAP
+  const top7cities = cityArr.slice(0,7).map(c=>c.name);
+  const hmHtml = `
+    <div style="display:grid;grid-template-columns:110px repeat(${top7cities.length},1fr);gap:4px;margin-bottom:6px">
+      <div></div>
+      ${top7cities.map((c,i)=>`<div style="font-size:9px;color:${COLORS[i]};text-align:center;font-weight:600;line-height:1.2;padding:2px">${c.split(' ').slice(-1)[0]}</div>`).join('')}
+    </div>
+    ${EQ_NAMES.map((eq,ei)=>{
+      const max = Math.max(...top7cities.map(c=>(stats.cities[c]?.totals[ei]||0)));
+      return `<div style="display:grid;grid-template-columns:110px repeat(${top7cities.length},1fr);gap:4px;margin-bottom:4px">
+        <div style="font-size:9px;color:var(--muted);display:flex;align-items:center">${eq}</div>
+        ${top7cities.map((c,ci)=>{
+          const v = stats.cities[c]?.totals[ei]||0;
+          const intensity = max>0?v/max:0;
+          const bg = v===0?'rgba(255,255,255,0.03)':`${COLORS[ei]}${Math.round(intensity*180+30).toString(16).padStart(2,'0')}`;
+          return `<div class="heat-cell" data-tip="${c} · ${eq}: ${v}" style="background:${bg};border-radius:4px;height:22px;cursor:default" title="${c}: ${v}">
+            ${v>0?`<div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:${intensity>0.5?'#000':'var(--text)'};">${v}</div>`:''}
+          </div>`;
+        }).join('')}
+      </div>`;
+    }).join('')}
+  `;
+  document.getElementById('heatmap-area').innerHTML = hmHtml;
+}
+
+// ============================================================
+// FILTER PILLS
+// ============================================================
+function buildFilters() {
+  const cities = [...new Set(DB.map(r=>r.cidade))].sort();
+  const bar = document.getElementById('filter-bar');
+  // Clear old city pills (keep first + search)
+  const pills = bar.querySelectorAll('.filter-pill:not([data-filter="all"])');
+  pills.forEach(p=>p.remove());
+  const allPill = bar.querySelector('[data-filter="all"]');
+  cities.slice(0,8).forEach(c=>{
+    const p = document.createElement('span');
+    p.className='filter-pill'; p.dataset.filter=c; p.textContent=c.split(' ').slice(-1)[0];
+    p.onclick=()=>{ activeFilter=c; document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active')); p.classList.add('active'); renderAll(); };
+    bar.insertBefore(p, document.getElementById('search-box'));
+  });
+  allPill.onclick=()=>{ activeFilter='all'; document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active')); allPill.classList.add('active'); renderAll(); };
+
+  // Datalist for form
+  const dl = document.getElementById('city-list');
+  dl.innerHTML = cities.map(c=>`<option value="${c}">`).join('');
+}
+
+// ============================================================
+// FORM
+// ============================================================
+function buildForm() {
+  document.getElementById('eq-form-grid').innerHTML = EQ_NAMES.map((name,i)=>`
+    <div class="eq-field">
+      <label>${name}</label>
+      <input type="number" id="eq-${i}" value="0" min="0" placeholder="0">
+    </div>
+  `).join('');
+}
+
+function insertZone() {
+  const zona = parseInt(document.getElementById('f-zona').value)||0;
+  const cidade = document.getElementById('f-cidade').value.trim().toUpperCase();
+  if(!cidade){ alert('Informe o nome da cidade.'); return; }
+
+  // Check duplicate zone
+  if(zona>0 && DB.some(r=>r.zona===zona)){
+    if(!confirm(`Zona ${zona} já existe na base. Continuar mesmo assim?`)) return;
+  }
+
+  const equip = EQ_NAMES.map((_,i)=>parseInt(document.getElementById('eq-'+i).value)||0);
+  const seq = Math.max(...DB.map(r=>r.seq))+1;
+
+  DB.push({seq, zona, cidade, equip});
+
+  // Reset form
+  document.getElementById('f-zona').value='';
+  document.getElementById('f-cidade').value='';
+  EQ_NAMES.forEach((_,i)=>{ document.getElementById('eq-'+i).value=0; });
+
+  // Refresh
+  buildFilters();
+  renderAll();
+
+  // Toast
+  const toast = document.getElementById('toast');
+  toast.textContent = `✓ Zona ${zona>0?zona:'s/nº'} – ${cidade} inserida! Dashboard atualizado.`;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3000);
+
+  // Update live counter
+  document.querySelector('.tag-cyan').textContent = `${DB.length} ZONAS`;
+}
+
+// ============================================================
+// SEARCH
+// ============================================================
+document.getElementById('search-box').addEventListener('input', e=>{
+  searchTerm = e.target.value;
+  renderAll();
+});
+
+// ============================================================
+// INIT
+// ============================================================
+buildFilters();
+buildForm();
+renderAll();
+</script>
+</body>
+</html>
