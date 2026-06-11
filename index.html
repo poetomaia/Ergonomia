@@ -7,26 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070b14; --bg2:#0d1321; --bg3:#141e30;
+  --bg:#070b14;--bg2:#0d1321;--bg3:#141e30;
   --border:rgba(255,255,255,0.08);
-  --text:#cdd9e8; --text-bright:#e8f0f8; --muted:#7a8aa0;
-  --cyan:#22c5e0; --purple:#9b7ff5; --pink:#e06aa0;
-  --green:#34c97e; --orange:#e88838; --yellow:#d9aa24;
-  --red:#e05858; --blue:#5a92dc;
+  --text:#cdd9e8;--text-bright:#e8f0f8;--muted:#7a8aa0;
+  --cyan:#22c5e0;--purple:#9b7ff5;--pink:#e06aa0;
+  --green:#34c97e;--orange:#e88838;--yellow:#d9aa24;
+  --red:#e05858;--blue:#5a92dc;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
 body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;overflow:hidden;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    radial-gradient(ellipse at 15% 50%,rgba(34,197,224,0.04) 0%,transparent 55%),
-    radial-gradient(ellipse at 85% 15%,rgba(155,127,245,0.05) 0%,transparent 50%),
-    radial-gradient(ellipse at 55% 85%,rgba(224,106,160,0.04) 0%,transparent 45%);}
-
+/* sem radial-gradient no body — removido */
 .shell{display:flex;height:100vh;position:relative;z-index:1;}
 
 /* ── SIDEBAR ── */
-.sidebar{width:225px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;}
+.sidebar{width:220px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;}
 .sb-brand{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
 .sb-badge{width:36px;height:36px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#07111e;}
 .sb-brand-text h2{font-size:12px;font-weight:800;color:var(--text-bright);line-height:1.3;}
@@ -42,12 +37,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .sb-nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0;color:var(--muted);}
 .sb-nav-label{font-size:11.5px;color:var(--text);font-weight:500;}
 .sb-nav-badge{margin-left:auto;font-size:9px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--muted);background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:8px;}
-.sb-foot{padding:12px 14px;border-top:1px solid var(--border);font-size:9px;color:var(--muted);line-height:1.5;font-family:'JetBrains Mono',monospace;}
+.sb-foot{padding:12px 14px;border-top:1px solid var(--border);font-size:9px;color:var(--muted);line-height:1.6;font-family:'JetBrains Mono',monospace;}
 
 /* ── MAIN ── */
 .main{flex:1;min-width:0;display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-
-/* TOP BAR */
 .topbar{padding:13px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2);flex-shrink:0;gap:12px;flex-wrap:wrap;}
 .topbar-title{font-size:16px;font-weight:800;color:var(--text-bright);letter-spacing:-0.3px;}
 .topbar-sub{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;}
@@ -55,18 +48,18 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .tbf-search{position:relative;}
 .tbf-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--cyan);pointer-events:none;}
 .tbf-input{background:rgba(34,197,224,0.06);border:1.5px solid rgba(34,197,224,0.3);border-radius:9px;padding:8px 12px 8px 32px;font-family:'Sora',sans-serif;font-size:11px;color:var(--text-bright);outline:none;transition:all 0.2s;width:200px;}
-.tbf-input:focus{border-color:var(--cyan);background:rgba(34,197,224,0.1);box-shadow:0 0 0 3px rgba(34,197,224,0.08);}
+.tbf-input:focus{border-color:var(--cyan);background:rgba(34,197,224,0.1);}
 .tbf-input::placeholder{color:var(--muted);}
 .tbf-zone{position:relative;}
 .tbf-zone svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--yellow);pointer-events:none;}
 .tbf-zone-input{background:rgba(217,170,36,0.06);border:1.5px solid rgba(217,170,36,0.35);border-radius:9px;padding:8px 12px 8px 32px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-bright);outline:none;transition:all 0.2s;width:130px;font-weight:700;}
-.tbf-zone-input:focus{border-color:var(--yellow);background:rgba(217,170,36,0.1);box-shadow:0 0 0 3px rgba(217,170,36,0.08);}
+.tbf-zone-input:focus{border-color:var(--yellow);}
 .tbf-zone-input::placeholder{color:var(--muted);font-weight:400;}
 .tbf-clear{padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-size:10px;cursor:pointer;font-family:'Sora',sans-serif;font-weight:600;transition:all 0.2s;}
 .tbf-clear:hover{color:var(--text-bright);border-color:rgba(255,255,255,0.2);}
 .tbf-clear.active{background:rgba(224,88,88,0.12);color:var(--red);border-color:rgba(224,88,88,0.3);}
 
-/* KPI BAR - sticky */
+/* KPI BAR sticky */
 .kpi-bar{padding:13px 24px;border-bottom:1px solid var(--border);display:flex;gap:11px;flex-shrink:0;background:rgba(13,19,33,0.7);overflow-x:auto;}
 .kpi-bar::-webkit-scrollbar{height:0;}
 .kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:13px 15px;position:relative;overflow:hidden;flex:1;min-width:125px;transition:transform 0.2s,border-color 0.2s;cursor:default;}
@@ -79,8 +72,12 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .kpi-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.1px;font-weight:600;margin-bottom:7px;}
 .kpi-value{font-size:25px;font-weight:800;line-height:1;font-family:'JetBrains Mono',monospace;letter-spacing:-1px;color:var(--text-bright);}
 .kpi-sub{font-size:9px;color:var(--muted);margin-top:5px;}
+/* animação só na carga inicial, controlada por JS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.kpi-init .kpi-card{animation:fadeIn 0.4s ease both;}
+.view-enter{animation:fadeIn 0.25s ease both;}
 
-/* EQUIPMENT MINI STRIP */
+/* EQUIPMENT STRIP */
 .eq-strip{padding:10px 24px;border-bottom:1px solid var(--border);background:rgba(13,19,33,0.4);display:flex;gap:8px;overflow-x:auto;flex-shrink:0;}
 .eq-strip::-webkit-scrollbar{height:3px;}
 .eq-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px;}
@@ -105,14 +102,21 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
 .grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:16px;}
-.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:16px;}
+
+/* TABS dentro de view */
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;}
+.tab-btn{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--muted);transition:all 0.15s;}
+.tab-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.15);}
+.tab-btn.active{background:rgba(34,197,224,0.1);border-color:rgba(34,197,224,0.3);color:var(--cyan);}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
 
 /* BARS */
 .bar-item{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .bar-rank{font-size:11px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--muted);width:22px;flex-shrink:0;text-align:center;}
-.bar-label{font-size:12px;font-weight:600;width:170px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.bar-label{font-size:12px;font-weight:600;width:160px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
 .bar-track{flex:1;height:11px;background:rgba(255,255,255,0.05);border-radius:6px;overflow:hidden;min-width:60px;}
-.bar-fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(.4,0,.2,1);}
+.bar-fill{height:100%;border-radius:6px;transition:width 0.9s cubic-bezier(.4,0,.2,1);}
 .bar-val{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text-bright);width:36px;text-align:right;flex-shrink:0;}
 .bar-pct{font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;width:46px;text-align:right;flex-shrink:0;}
 
@@ -120,7 +124,6 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .donut-wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
 .donut-legend{flex:1;min-width:140px;}
 .legend-item{display:flex;align-items:center;gap:8px;margin-bottom:7px;cursor:pointer;}
-.legend-item:hover .legend-label{color:var(--text-bright);}
 .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .legend-label{font-size:11px;color:var(--text);flex:1;font-weight:500;}
 .legend-val{font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:800;}
@@ -166,7 +169,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .rank-zones{font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:1px;}
 .rank-bar-wrap{width:70px;flex-shrink:0;}
 .rank-bar-bg{height:5px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;}
-.rank-bar-fill{height:100%;border-radius:3px;transition:width 0.8s;}
+.rank-bar-fill{height:100%;border-radius:3px;}
 .rank-val{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;width:30px;text-align:right;flex-shrink:0;}
 
 /* DETAIL HERO */
@@ -177,26 +180,22 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .dk{background:rgba(255,255,255,0.05);border-radius:10px;padding:12px 16px;min-width:95px;}
 .dk-val{font-size:21px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--text-bright);line-height:1;}
 .dk-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:5px;}
-
-/* SECTION TITLE INLINE */
 .sec-intro{font-size:11px;color:var(--text);line-height:1.6;margin-bottom:14px;background:rgba(255,255,255,0.02);border-left:3px solid var(--cyan);padding:10px 14px;border-radius:0 8px 8px 0;}
 
-/* STAT TABLE (projeções) */
+/* PROJEÇÕES */
 .proj-highlight{color:var(--cyan);font-weight:800;font-family:'JetBrains Mono',monospace;}
 .proj-ci{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
-
-/* TIMELINE */
 .timeline-bar{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .timeline-month{font-size:11px;width:90px;flex-shrink:0;color:var(--text);font-weight:600;}
-.timeline-track{flex:1;height:22px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden;position:relative;}
+.timeline-track{flex:1;height:24px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden;position:relative;}
 .timeline-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;color:#07111e;transition:width 1s;}
-.timeline-val{font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;width:80px;text-align:right;flex-shrink:0;color:var(--text);}
+.timeline-val{font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;width:90px;text-align:right;flex-shrink:0;color:var(--text);}
 
 /* PDF PANEL */
 .pdf-panel{background:linear-gradient(135deg,rgba(34,197,224,0.05),rgba(155,127,245,0.05));border:1px solid rgba(34,197,224,0.14);border-radius:14px;padding:22px;margin-bottom:16px;}
 .pdf-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px;}
 .pdf-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--cyan);margin-bottom:4px;}
-.pdf-sub{font-size:10px;color:var(--text);margin-bottom:0;line-height:1.5;}
+.pdf-sub{font-size:10px;color:var(--text);line-height:1.5;}
 .pdf-body{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .pdf-col{display:flex;flex-direction:column;gap:12px;}
 .pdf-section-title{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px;}
@@ -215,10 +214,6 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .btn-pdf:hover{opacity:0.92;transform:translateY(-1px);}
 .btn-pdf svg{width:15px;height:15px;flex-shrink:0;}
 
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.view.active{animation:fadeIn 0.3s ease both;}
-.kpi-card{animation:fadeIn 0.4s ease both;}
-
 @media(max-width:1000px){
   .shell{flex-direction:column;}
   .sidebar{width:100%;height:auto;flex-direction:row;flex-wrap:wrap;}
@@ -227,7 +222,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   body{overflow:auto;}
   .main{height:auto;overflow:visible;}
   .content-area{overflow:visible;}
-  .grid2,.grid3,.grid-2-1,.grid-1-2,.prio-grid{grid-template-columns:1fr;}
+  .grid2,.grid3,.grid-2-1,.prio-grid{grid-template-columns:1fr;}
   .pdf-body,.pdf-opts{grid-template-columns:1fr;}
 }
 </style>
@@ -235,23 +230,22 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 <body>
 <div class="shell">
 
-<!-- ═══ SIDEBAR ═══ -->
+<!-- ═══ SIDEBAR — 7 seções ═══ -->
 <aside class="sidebar">
   <div class="sb-brand">
     <div class="sb-badge">TR</div>
     <div class="sb-brand-text"><h2>ERGONOMIA INTERIOR</h2><p>TRE-BA · SEGEP/COMAP/SGA</p></div>
   </div>
   <nav class="sb-nav">
-    <div class="sb-nav-item active" data-view="geral" onclick="switchView('geral',this)"><span class="sb-nav-icon">▣</span><span class="sb-nav-label">Painel Geral</span></div>
-    <div class="sb-nav-item" data-view="prioridades" onclick="switchView('prioridades',this)"><span class="sb-nav-icon">⚡</span><span class="sb-nav-label">Prioridades</span></div>
-    <div class="sb-nav-item" data-view="municipios" onclick="switchView('municipios',this)"><span class="sb-nav-icon">◉</span><span class="sb-nav-label">Ranking Municípios</span></div>
-    <div class="sb-nav-item" data-view="zonas" onclick="switchView('zonas',this)"><span class="sb-nav-icon">📍</span><span class="sb-nav-label">Detalhamento Zona</span><span class="sb-nav-badge" id="nb-zonas">68</span></div>
-    <div class="sb-nav-item" data-view="cidades" onclick="switchView('cidades',this)"><span class="sb-nav-icon">🏙</span><span class="sb-nav-label">Consolidado Cidade</span></div>
-    <div class="sb-nav-item" data-view="equipamento" onclick="switchView('equipamento',this)"><span class="sb-nav-icon">📦</span><span class="sb-nav-label">Por Equipamento</span></div>
-    <div class="sb-nav-item" data-view="projecoes" onclick="switchView('projecoes',this)"><span class="sb-nav-icon">📈</span><span class="sb-nav-label">Estimativas</span></div>
-    <div class="sb-nav-item" data-view="relatorio" onclick="switchView('relatorio',this)"><span class="sb-nav-icon">📄</span><span class="sb-nav-label">Relatório</span></div>
+    <div class="sb-nav-item active" data-view="geral"       onclick="switchView('geral',this)"><span class="sb-nav-icon">▣</span><span class="sb-nav-label">Painel Geral</span></div>
+    <div class="sb-nav-item"        data-view="prioridades" onclick="switchView('prioridades',this)"><span class="sb-nav-icon">⚡</span><span class="sb-nav-label">Prioridades</span></div>
+    <div class="sb-nav-item"        data-view="municipios"  onclick="switchView('municipios',this)"><span class="sb-nav-icon">◉</span><span class="sb-nav-label">Municípios</span><span class="sb-nav-badge" id="nb-mun">55</span></div>
+    <div class="sb-nav-item"        data-view="zonas"       onclick="switchView('zonas',this)"><span class="sb-nav-icon">📍</span><span class="sb-nav-label">Det. Zona</span><span class="sb-nav-badge" id="nb-zonas">68</span></div>
+    <div class="sb-nav-item"        data-view="equipamento" onclick="switchView('equipamento',this)"><span class="sb-nav-icon">📦</span><span class="sb-nav-label">Por Equipamento</span></div>
+    <div class="sb-nav-item"        data-view="projecoes"   onclick="switchView('projecoes',this)"><span class="sb-nav-icon">📈</span><span class="sb-nav-label">Estimativas</span></div>
+    <div class="sb-nav-item"        data-view="relatorio"   onclick="switchView('relatorio',this)"><span class="sb-nav-icon">📄</span><span class="sb-nav-label">Relatório</span></div>
   </nav>
-  <div class="sb-foot">68 de 180 zonas<br>avaliadas · 37,8%</div>
+  <div class="sb-foot" id="sb-foot">— de 180 zonas avaliadas</div>
 </aside>
 
 <!-- ═══ MAIN ═══ -->
@@ -259,7 +253,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   <div class="topbar">
     <div>
       <div class="topbar-title" id="topbar-title">Painel Geral</div>
-      <div class="topbar-sub" id="topbar-sub">Todas as zonas · Bahia</div>
+      <div class="topbar-sub"   id="topbar-sub">Todas as zonas · Bahia</div>
     </div>
     <div class="topbar-filters">
       <div class="tbf-search">
@@ -274,21 +268,21 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     </div>
   </div>
 
-  <!-- KPIs STICKY -->
-  <div class="kpi-bar">
-    <div class="kpi-card" data-accent="cyan"><div class="kpi-label">Zonas Levantadas</div><div class="kpi-value" id="kpi-zonas">68</div><div class="kpi-sub">cartórios</div></div>
-    <div class="kpi-card" data-accent="purple"><div class="kpi-label">Cidades Atendidas</div><div class="kpi-value" id="kpi-cidades">55</div><div class="kpi-sub">municípios</div></div>
-    <div class="kpi-card" data-accent="green"><div class="kpi-label">Total de Itens</div><div class="kpi-value" id="kpi-total">573</div><div class="kpi-sub">equipamentos</div></div>
-    <div class="kpi-card" data-accent="pink"><div class="kpi-label">Cidades Multizona</div><div class="kpi-value" id="kpi-multi">10</div><div class="kpi-sub">2+ cartórios</div></div>
+  <!-- KPIs — animação controlada por flag kpiAnimated -->
+  <div class="kpi-bar" id="kpi-bar">
+    <div class="kpi-card" data-accent="cyan">  <div class="kpi-label">Zonas Levantadas</div> <div class="kpi-value" id="kpi-zonas">—</div><div class="kpi-sub">cartórios</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-label">Cidades Atendidas</div><div class="kpi-value" id="kpi-cidades">—</div><div class="kpi-sub">municípios</div></div>
+    <div class="kpi-card" data-accent="green"> <div class="kpi-label">Total de Itens</div>   <div class="kpi-value" id="kpi-total">—</div> <div class="kpi-sub">equipamentos</div></div>
+    <div class="kpi-card" data-accent="pink">  <div class="kpi-label">Cidades Multizona</div><div class="kpi-value" id="kpi-multi">—</div> <div class="kpi-sub">2+ cartórios</div></div>
   </div>
 
   <!-- EQUIPMENT STRIP -->
   <div class="eq-strip" id="eq-strip"></div>
 
-  <!-- CONTENT -->
+  <!-- CONTEÚDO -->
   <div class="content-area" id="content-area">
 
-    <!-- ═══ VIEW: PAINEL GERAL ═══ -->
+    <!-- ═══ PAINEL GERAL ═══ -->
     <div class="view active" id="view-geral">
       <div class="grid-2-1">
         <div class="card">
@@ -296,12 +290,12 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <div id="g-eq-bars"></div>
         </div>
         <div class="card">
-          <div class="card-header"><span class="card-title">Distribuição</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)" id="g-donut-badge">—</span></div>
+          <div class="card-header"><span class="card-title">Distribuição por Cidade</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)" id="g-donut-badge">—</span></div>
           <div class="donut-wrap" style="flex-direction:column;align-items:center">
             <svg width="150" height="150" viewBox="0 0 150 150">
               <circle cx="75" cy="75" r="58" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="20"/>
               <g id="g-donut-arcs" transform="rotate(-90 75 75)"></g>
-              <text x="75" y="71" text-anchor="middle" fill="#e8f0f8" font-size="24" font-weight="800" font-family="JetBrains Mono" id="g-donut-center">573</text>
+              <text x="75" y="71" text-anchor="middle" fill="#e8f0f8" font-size="24" font-weight="800" font-family="JetBrains Mono" id="g-donut-center">—</text>
               <text x="75" y="88" text-anchor="middle" fill="#7a8aa0" font-size="10" font-family="Sora">itens totais</text>
             </svg>
             <div class="donut-legend" id="g-donut-legend" style="width:100%"></div>
@@ -310,19 +304,19 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="grid2">
         <div class="card">
-          <div class="card-header"><span class="card-title">Top 10 Municípios</span><span class="card-badge" style="background:rgba(72,146,220,0.1);color:var(--blue)">POR DEMANDA</span></div>
+          <div class="card-header"><span class="card-title">Top 10 Municípios</span><span class="card-badge" style="background:rgba(90,146,220,0.1);color:var(--blue)">POR DEMANDA</span></div>
           <div id="g-mun-ranking"></div>
         </div>
         <div class="card">
           <div class="card-header"><span class="card-title">Resumo Executivo</span><span class="card-badge" style="background:rgba(52,201,126,0.1);color:var(--green)">ANÁLISE</span></div>
-          <div id="g-resumo" style="font-size:11.5px;line-height:1.7;color:var(--text)"></div>
+          <div id="g-resumo" style="font-size:11.5px;line-height:1.8;color:var(--text)"></div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ VIEW: PRIORIDADES ═══ -->
+    <!-- ═══ PRIORIDADES ═══ -->
     <div class="view" id="view-prioridades">
-      <div class="sec-intro">Classificação gerencial por volume de demanda. Identifique rapidamente onde concentrar as aquisições.</div>
+      <div class="sec-intro">Classificação por volume de demanda. Alta prioridade: ≥ 20 itens. Média: 8–19. Baixa: 1–7.</div>
       <div class="card">
         <div class="card-header"><span class="card-title">Municípios por Nível de Prioridade</span><span class="card-badge" style="background:rgba(217,170,36,0.1);color:var(--yellow)">CRITICIDADE</span></div>
         <div class="prio-grid" id="p-prio-grid"></div>
@@ -333,30 +327,35 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <div id="p-eq-critical"></div>
         </div>
         <div class="card">
-          <div class="card-header"><span class="card-title">Zonas Prioritárias</span><span class="card-badge" style="background:rgba(232,136,56,0.1);color:var(--orange)">TOP 12 ZONAS</span></div>
+          <div class="card-header"><span class="card-title">Top 12 Zonas Prioritárias</span><span class="card-badge" style="background:rgba(232,136,56,0.1);color:var(--orange)">RANKING</span></div>
           <div id="p-zonas-priority"></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="card-title">Concentração da Demanda</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)">CURVA DE PARETO</span></div>
+        <div class="card-header"><span class="card-title">Curva de Pareto — Concentração da Demanda</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)">ACUMULADO</span></div>
         <div id="p-pareto"></div>
       </div>
     </div>
 
-    <!-- ═══ VIEW: MUNICÍPIOS ═══ -->
+    <!-- ═══ MUNICÍPIOS (Ranking + Consolidado em abas) ═══ -->
     <div class="view" id="view-municipios">
-      <div class="sec-intro">Ranking completo dos municípios. Use o filtro de equipamento para ver quem mais demanda cada item.</div>
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">Filtrar ranking por equipamento</span>
-          <select id="m-eq-filter" onchange="renderMunicipios()" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--text-bright);font-family:'Sora',sans-serif;font-size:11px;outline:none;cursor:pointer">
-            <option value="-1">Todos os equipamentos (total)</option>
-          </select>
-        </div>
-        <div class="grid-2-1">
-          <div id="m-ranking-bars"></div>
-          <div>
-            <div class="donut-wrap" style="flex-direction:column;align-items:center">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('mun','ranking',this)">Ranking por Equipamento</button>
+        <button class="tab-btn"        onclick="switchTab('mun','consolidado',this)">Consolidado e Multizona</button>
+      </div>
+
+      <!-- TAB: Ranking -->
+      <div class="tab-pane active" id="mun-tab-ranking">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Filtrar por equipamento</span>
+            <select id="m-eq-filter" onchange="renderMunicipiosRanking()" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--text-bright);font-family:'Sora',sans-serif;font-size:11px;outline:none;cursor:pointer;appearance:none;">
+              <option value="-1">Todos os equipamentos (total)</option>
+            </select>
+          </div>
+          <div class="grid-2-1">
+            <div id="m-ranking-bars"></div>
+            <div style="display:flex;flex-direction:column;align-items:center">
               <svg width="140" height="140" viewBox="0 0 150 150">
                 <circle cx="75" cy="75" r="58" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="20"/>
                 <g id="m-donut-arcs" transform="rotate(-90 75 75)"></g>
@@ -367,14 +366,32 @@ tr:hover td{background:rgba(255,255,255,0.02);}
             </div>
           </div>
         </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Tabela Completa</span><span class="card-badge" style="background:rgba(52,201,126,0.1);color:var(--green)" id="m-table-badge">—</span></div>
+          <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Município</th><th>Zonas</th><th>Total</th><th>%</th><th>Prioridade</th></tr></thead><tbody id="m-table-body"></tbody></table></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="card-header"><span class="card-title">Tabela Detalhada</span><span class="card-badge" style="background:rgba(52,201,126,0.1);color:var(--green)" id="m-table-badge">55 cidades</span></div>
-        <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Município</th><th>Zonas</th><th>Total</th><th>%</th><th>Prioridade</th></tr></thead><tbody id="m-table-body"></tbody></table></div>
+
+      <!-- TAB: Consolidado -->
+      <div class="tab-pane" id="mun-tab-consolidado">
+        <div class="grid-2-1">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Top 15 — Comparativo</span><span class="card-badge" style="background:rgba(34,197,224,0.1);color:var(--cyan)">TOTAL GERAL</span></div>
+            <div id="c-bars"></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Cidades Multizona</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)">2+ CARTÓRIOS</span></div>
+            <div id="c-multizona"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Consolidado por Cidade</span><span class="card-badge" style="background:rgba(52,201,126,0.1);color:var(--green)" id="c-table-badge">—</span></div>
+          <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Cidade</th><th>Zonas</th><th>Nº zonas</th><th>Total</th><th>%</th></tr></thead><tbody id="c-table-body"></tbody></table></div>
+        </div>
       </div>
     </div>
 
-    <!-- ═══ VIEW: ZONAS ═══ -->
+    <!-- ═══ DETALHAMENTO ZONA ═══ -->
     <div class="view" id="view-zonas">
       <div id="z-detail-hero" style="display:none" class="detail-hero"></div>
       <div class="grid-2-1">
@@ -389,28 +406,9 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
     </div>
 
-    <!-- ═══ VIEW: CIDADES ═══ -->
-    <div class="view" id="view-cidades">
-      <div class="sec-intro">Consolidado por cidade com zonas agrupadas. Clique em uma cidade para expandir o detalhe das zonas.</div>
-      <div class="grid-2-1">
-        <div class="card">
-          <div class="card-header"><span class="card-title">Comparativo Visual</span><span class="card-badge" style="background:rgba(34,197,224,0.1);color:var(--cyan)">TOP 15</span></div>
-          <div id="c-bars"></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><span class="card-title">Multizona</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)">2+ CARTÓRIOS</span></div>
-          <div id="c-multizona"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><span class="card-title">Tabela Consolidada</span><span class="card-badge" style="background:rgba(52,201,126,0.1);color:var(--green)" id="c-table-badge">55 cidades</span></div>
-        <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Cidade</th><th>Zonas avaliadas</th><th>Nº zonas</th><th>Total itens</th><th>%</th></tr></thead><tbody id="c-table-body"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- ═══ VIEW: EQUIPAMENTO ═══ -->
+    <!-- ═══ POR EQUIPAMENTO ═══ -->
     <div class="view" id="view-equipamento">
-      <div class="sec-intro">Selecione um equipamento nos cartões abaixo para ver ranking de cidades, zonas e distribuição.</div>
+      <div class="sec-intro">Selecione um equipamento para ver ranking de cidades, zonas e distribuição detalhada.</div>
       <div class="card">
         <div class="card-header"><span class="card-title">Selecione o Equipamento</span><span class="card-badge" style="background:rgba(232,136,56,0.1);color:var(--orange)">CLIQUE PARA ANALISAR</span></div>
         <div id="e-donut-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px"></div>
@@ -434,58 +432,67 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
     </div>
 
-    <!-- ═══ VIEW: PROJEÇÕES ═══ -->
+    <!-- ═══ ESTIMATIVAS ═══ -->
     <div class="view" id="view-projecoes">
-      <div class="sec-intro">Projeção estatística das necessidades finais considerando <strong style="color:var(--cyan)">180 zonas eleitorais</strong> na Bahia. Atualmente <strong style="color:var(--cyan)">68 avaliadas (37,8%)</strong>. Métodos: média por zona, desvio-padrão e intervalo de confiança de 95%.</div>
+      <div class="sec-intro" id="proj-intro">Projeção estatística para as <strong style="color:var(--cyan)">180 zonas</strong> da Bahia. Método: média por zona com IC 95% e correção de população finita.</div>
       <div class="grid3">
-        <div class="kpi-card" data-accent="cyan" style="flex:none"><div class="kpi-label">Zonas Avaliadas</div><div class="kpi-value">68</div><div class="kpi-sub">de 180 totais</div></div>
-        <div class="kpi-card" data-accent="purple" style="flex:none"><div class="kpi-label">Zonas Restantes</div><div class="kpi-value">112</div><div class="kpi-sub">a avaliar</div></div>
-        <div class="kpi-card" data-accent="green" style="flex:none"><div class="kpi-label">Demanda Projetada</div><div class="kpi-value" id="pr-total-proj">—</div><div class="kpi-sub">itens estimados (180 zonas)</div></div>
+        <div class="kpi-card" data-accent="cyan"   style="flex:none"><div class="kpi-label">Zonas Avaliadas</div>   <div class="kpi-value" id="pr-aval">68</div>  <div class="kpi-sub">de 180 totais</div></div>
+        <div class="kpi-card" data-accent="purple" style="flex:none"><div class="kpi-label">Zonas Restantes</div>   <div class="kpi-value" id="pr-rest">112</div> <div class="kpi-sub">a avaliar</div></div>
+        <div class="kpi-card" data-accent="green"  style="flex:none"><div class="kpi-label">Demanda Projetada</div> <div class="kpi-value" id="pr-total-proj">—</div><div class="kpi-sub">itens (180 zonas)</div></div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="card-title">Projeção por Equipamento</span><span class="card-badge" style="background:rgba(34,197,224,0.1);color:var(--cyan)">MÉTODO PROPORCIONAL · IC 95%</span></div>
-        <div class="tbl-scroll"><table><thead><tr><th>Equipamento</th><th>Observado</th><th>Média/zona</th><th>Desvio</th><th>Projeção 180</th><th>Intervalo provável</th></tr></thead><tbody id="pr-table-body"></tbody></table></div>
+        <div class="card-header"><span class="card-title">Projeção por Equipamento</span><span class="card-badge" style="background:rgba(34,197,224,0.1);color:var(--cyan)">PROPORCIONAL · IC 95%</span></div>
+        <div class="tbl-scroll"><table><thead><tr><th>Equipamento</th><th>Observado</th><th>Média/zona</th><th>Desvio</th><th>Projeção 180</th><th>Intervalo IC 95%</th></tr></thead><tbody id="pr-table-body"></tbody></table></div>
       </div>
       <div class="grid2">
         <div class="card">
-          <div class="card-header"><span class="card-title">Demanda Projetada — Ranking</span><span class="card-badge" style="background:rgba(232,136,56,0.1);color:var(--orange)">AO FINAL</span></div>
+          <div class="card-header"><span class="card-title">Ranking Projetado ao Final</span><span class="card-badge" style="background:rgba(232,136,56,0.1);color:var(--orange)">180 ZONAS</span></div>
           <div id="pr-proj-bars"></div>
         </div>
         <div class="card">
-          <div class="card-header"><span class="card-title">Cronograma Projetado</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)">15 ZONAS/MÊS</span></div>
+          <div class="card-header"><span class="card-title">Cronograma de Levantamentos</span><span class="card-badge" style="background:rgba(155,127,245,0.1);color:var(--purple)">ACUMULADO · 15 ZONAS/MÊS</span></div>
           <div id="pr-timeline"></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header"><span class="card-title">Evolução Acumulada dos Levantamentos</span><span class="card-badge" style="background:rgba(52,201,126,0.1);color:var(--green)">REALIZADO × PROJETADO</span></div>
-        <div id="pr-evolution"></div>
-      </div>
     </div>
 
-    <!-- ═══ VIEW: RELATÓRIO ═══ -->
+    <!-- ═══ RELATÓRIO ═══ -->
     <div class="view" id="view-relatorio">
       <div class="pdf-panel">
         <div class="pdf-header">
-          <div><div class="pdf-title">Gerador de Relatório Consolidado</div><div class="pdf-sub">Configure as seções, o escopo e o contexto. Gera documento estruturado para impressão em PDF.</div></div>
-          <button class="btn-pdf" onclick="gerarRelatorio()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>GERAR RELATÓRIO</button>
+          <div><div class="pdf-title">Gerador de Relatório Consolidado</div><div class="pdf-sub">Configure seções e escopo. Gera documento estruturado para impressão em PDF.</div></div>
+          <button class="btn-pdf" onclick="gerarRelatorio()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            GERAR RELATÓRIO
+          </button>
         </div>
         <div class="pdf-body">
-          <div class="pdf-col"><div><div class="pdf-section-title">Seções a incluir</div>
-            <div class="pdf-opts">
-              <div class="pdf-opt"><input type="checkbox" id="s-resumo" checked><label for="s-resumo">Resumo Executivo</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-kpi" checked><label for="s-kpi">Indicadores Gerais</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-prio" checked><label for="s-prio">Painel de Prioridades</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-eq" checked><label for="s-eq">Ranking Equipamentos</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-rank" checked><label for="s-rank">Ranking Municípios</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-city" checked><label for="s-city">Consolidado Cidades</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-zone" checked><label for="s-zone">Tabela por Zona</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-listeq" checked><label for="s-listeq">Listagem por Equipamento</label></div>
-              <div class="pdf-opt"><input type="checkbox" id="s-proj" checked><label for="s-proj">Estimativas e Projeções</label></div>
-            </div>
-          </div></div>
           <div class="pdf-col">
-            <div class="pdf-field"><label>Escopo</label><select id="r-escopo"><option value="all">Todas as cidades</option><option value="current">Filtro atual</option><option value="alta">Prioridade Alta (≥ 20)</option><option value="media">Prioridade Média (8–19)</option><option value="baixa">Prioridade Baixa (1–7)</option></select></div>
-            <div class="pdf-field"><label>Referência</label><input type="text" id="r-ref" placeholder="Ex: SEI 0011335-20.2026.6.05.8000"></div>
+            <div>
+              <div class="pdf-section-title">Seções a incluir</div>
+              <div class="pdf-opts">
+                <div class="pdf-opt"><input type="checkbox" id="s-resumo"  checked><label for="s-resumo">Resumo Executivo</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-kpi"     checked><label for="s-kpi">Indicadores Gerais</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-prio"    checked><label for="s-prio">Prioridades</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-eq"      checked><label for="s-eq">Ranking Equipamentos</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-rank"    checked><label for="s-rank">Ranking Municípios</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-zone"    checked><label for="s-zone">Tabela por Zona</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-listeq"  checked><label for="s-listeq">Listagem por Equipamento</label></div>
+                <div class="pdf-opt"><input type="checkbox" id="s-proj"    checked><label for="s-proj">Estimativas e Projeções</label></div>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-col">
+            <div class="pdf-field"><label>Escopo</label>
+              <select id="r-escopo">
+                <option value="all">Todas as cidades</option>
+                <option value="current">Filtro atual</option>
+                <option value="alta">Prioridade Alta (≥ 20)</option>
+                <option value="media">Prioridade Média (8–19)</option>
+                <option value="baixa">Prioridade Baixa (1–7)</option>
+              </select>
+            </div>
+            <div class="pdf-field"><label>Referência SEI</label><input type="text" id="r-ref" placeholder="Ex: 0011335-20.2026.6.05.8000"></div>
             <div class="pdf-field"><label>Observações</label><textarea id="r-obs" placeholder="Contexto adicional…"></textarea></div>
           </div>
         </div>
@@ -497,79 +504,134 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 </div><!-- /shell -->
 
 <script>
-// ════════════════════════════════════════════════════════════
-// ERGONOMIA INTERIOR — 68 zonas | 55 cidades | 573 itens
+// ════════════════════════════════════════════════════════
+// ERGONOMIA INTERIOR — TRE-BA
 // Fonte: base_original_interior.xlsx
-// ════════════════════════════════════════════════════════════
-const DB = [{"seq": 1, "zona": 22, "cidade": "JEQUIE", "equip": [0, 6, 0, 0, 0, 0, 0, 1, 6, 4, 0, 4, 0, 0]}, {"seq": 2, "zona": 23, "cidade": "JEQUIE", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0]}, {"seq": 3, "zona": 147, "cidade": "ITAJIBA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 5, 2, 0, 0, 0, 1]}, {"seq": 4, "zona": 39, "cidade": "VITORIA DA CONQUISTA", "equip": [0, 4, 0, 0, 0, 0, 2, 4, 0, 7, 0, 0, 0, 1]}, {"seq": 5, "zona": 40, "cidade": "VITORIA DA CONQUISTA", "equip": [0, 0, 0, 0, 0, 0, 3, 0, 0, 4, 0, 0, 0, 1]}, {"seq": 6, "zona": 41, "cidade": "VITORIA DA CONQUISTA", "equip": [0, 1, 0, 0, 0, 0, 1, 2, 1, 12, 0, 0, 0, 1]}, {"seq": 7, "zona": 161, "cidade": "ANAGÉ", "equip": [0, 0, 0, 0, 0, 0, 3, 0, 4, 1, 0, 3, 0, 1]}, {"seq": 8, "zona": 88, "cidade": "SEABRA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 1]}, {"seq": 9, "zona": 101, "cidade": "LIVRAMENTO NOSSA SENHORA", "equip": [0, 4, 0, 0, 0, 0, 5, 0, 6, 0, 0, 0, 0, 1]}, {"seq": 10, "zona": 105, "cidade": "PIATÃ", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]}, {"seq": 11, "zona": 65, "cidade": "MACAUBAS", "equip": [0, 0, 0, 0, 0, 0, 4, 0, 3, 0, 0, 0, 0, 0]}, {"seq": 12, "zona": 111, "cidade": "PARAMIRIM", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"seq": 13, "zona": 89, "cidade": "LENÇOIS", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"seq": 14, "zona": 176, "cidade": "BARRA DO MENDES", "equip": [0, 1, 0, 0, 0, 0, 1, 3, 1, 1, 0, 0, 0, 0]}, {"seq": 15, "zona": 174, "cidade": "CANARANA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]}, {"seq": 16, "zona": 46, "cidade": "JACOBINA", "equip": [0, 0, 0, 0, 0, 0, 5, 0, 4, 2, 1, 0, 0, 0]}, {"seq": 17, "zona": 167, "cidade": "JACOBINA", "equip": [0, 1, 0, 0, 0, 0, 4, 0, 1, 3, 0, 0, 0, 0]}, {"seq": 18, "zona": 36, "cidade": "AMARGOSA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 1]}, {"seq": 19, "zona": 160, "cidade": "SANTA BARBARA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]}, {"seq": 20, "zona": 110, "cidade": "RIBEIRA DO POMBAL", "equip": [0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 0, 3, 0, 1]}, {"seq": 21, "zona": 163, "cidade": "ALAGOINHAS", "equip": [0, 0, 1, 0, 0, 1, 0, 0, 1, 7, 0, 0, 1, 1]}, {"seq": 22, "zona": 94, "cidade": "OLIVEIRA DOS BREJINHOS", "equip": [0, 0, 0, 0, 0, 0, 1, 1, 4, 2, 1, 0, 2, 0]}, {"seq": 23, "zona": 70, "cidade": "BARREIRAS", "equip": [0, 6, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0]}, {"seq": 24, "zona": 135, "cidade": "COARACI", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 0, 0, 1]}, {"seq": 25, "zona": 75, "cidade": "BARREIRAS", "equip": [0, 0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 0, 0, 0]}, {"seq": 26, "zona": 191, "cidade": "CAPIM GROSSO", "equip": [0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1]}, {"seq": 27, "zona": 87, "cidade": "RUY BARBOSA", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1]}, {"seq": 28, "zona": 139, "cidade": "BARRA DO CHOÇA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1]}, {"seq": 29, "zona": 201, "cidade": "ITAMBÉ", "equip": [0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0]}, {"seq": 30, "zona": 140, "cidade": "ITAPETINGA", "equip": [0, 1, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 1]}, {"seq": 31, "zona": 137, "cidade": "ITORORO", "equip": [0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0]}, {"seq": 32, "zona": 62, "cidade": "IPIRA", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 1]}, {"seq": 33, "zona": 100, "cidade": "SÃO DESIDERIO", "equip": [0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 1]}, {"seq": 34, "zona": 154, "cidade": "FEIRA DE SANTANA", "equip": [0, 5, 0, 0, 0, 0, 0, 0, 4, 4, 2, 0, 0, 0]}, {"seq": 35, "zona": 155, "cidade": "FEIRA DE SANTANA", "equip": [0, 9, 0, 0, 0, 0, 0, 0, 2, 10, 0, 0, 3, 0]}, {"seq": 36, "zona": 156, "cidade": "FEIRA DE SANTANA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0]}, {"seq": 37, "zona": 90, "cidade": "BRUMADO", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1]}, {"seq": 38, "zona": 49, "cidade": "RIO REAL", "equip": [0, 3, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1]}, {"seq": 39, "zona": 52, "cidade": "PARAPIRANGA", "equip": [0, 1, 0, 0, 0, 0, 1, 1, 5, 4, 0, 5, 0, 2]}, {"seq": 40, "zona": 158, "cidade": "CHORROCHO", "equip": [0, 2, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0]}, {"seq": 41, "zona": 99, "cidade": "SANTANA", "equip": [0, 3, 0, 0, 0, 0, 3, 1, 3, 0, 0, 0, 0, 0]}, {"seq": 42, "zona": 54, "cidade": "MUNDO NOVO", "equip": [0, 4, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0]}, {"seq": 43, "zona": 136, "cidade": "ITAJUIPE", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]}, {"seq": 44, "zona": 134, "cidade": "UBATA", "equip": [0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0, 0, 0, 0]}, {"seq": 45, "zona": 73, "cidade": "UBAITABA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]}, {"seq": 46, "zona": 64, "cidade": "GUANAMBI", "equip": [0, 3, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1]}, {"seq": 47, "zona": 173, "cidade": "IBOTIRAMA", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1]}, {"seq": 48, "zona": 198, "cidade": "URUÇUCA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0]}, {"seq": 49, "zona": 72, "cidade": "SANTA MARIA DA VITORIA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0, 1]}, {"seq": 50, "zona": 83, "cidade": "UAUA", "equip": [0, 0, 0, 0, 0, 0, 4, 0, 1, 3, 0, 0, 0, 1]}, {"seq": 51, "zona": 166, "cidade": "BUERAREMA", "equip": [0, 0, 1, 0, 0, 0, 4, 0, 2, 1, 1, 0, 0, 1]}, {"seq": 52, "zona": 56, "cidade": "SANTO ANTONIO DE JESUS", "equip": [0, 4, 0, 0, 0, 0, 4, 0, 5, 4, 1, 0, 0, 2]}, {"seq": 53, "zona": 202, "cidade": "SANTO ANTONIO DE JESUS", "equip": [0, 1, 0, 0, 0, 0, 2, 0, 1, 2, 3, 0, 0, 0]}, {"seq": 54, "zona": 151, "cidade": "GANDU", "equip": [0, 2, 0, 0, 0, 0, 3, 0, 0, 4, 0, 0, 0, 1]}, {"seq": 55, "zona": 24, "cidade": "IPIAU", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1]}, {"seq": 56, "zona": 122, "cidade": "PORTO SEGURO", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1]}, {"seq": 57, "zona": 121, "cidade": "PORTO SEGURO", "equip": [0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0]}, {"seq": 58, "zona": 203, "cidade": "EUNAPOLIS", "equip": [0, 0, 0, 0, 0, 0, 3, 0, 3, 1, 1, 0, 0, 0]}, {"seq": 59, "zona": 188, "cidade": "EUNAPOLIS", "equip": [0, 4, 0, 0, 0, 0, 2, 0, 4, 2, 0, 0, 0, 0]}, {"seq": 60, "zona": 112, "cidade": "PRADO", "equip": [0, 1, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1]}, {"seq": 61, "zona": 35, "cidade": "MUCURI", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"seq": 62, "zona": 189, "cidade": "ITABELA", "equip": [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0]}, {"seq": 63, "zona": 25, "cidade": "ILHEUS", "equip": [0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 1]}, {"seq": 64, "zona": 26, "cidade": "ILHEUS", "equip": [0, 3, 0, 0, 0, 0, 1, 2, 0, 1, 1, 0, 0, 1]}, {"seq": 65, "zona": 28, "cidade": "ITABUNA", "equip": [0, 1, 0, 0, 0, 0, 0, 0, 5, 2, 1, 0, 0, 0]}, {"seq": 66, "zona": 27, "cidade": "ITABUNA", "equip": [0, 7, 0, 0, 0, 0, 0, 1, 5, 5, 1, 0, 0, 1]}, {"seq": 67, "zona": 133, "cidade": "CAMACA", "equip": [0, 1, 0, 0, 0, 0, 5, 1, 5, 0, 0, 0, 0, 0]}, {"seq": 68, "zona": 157, "cidade": "FEIRA DE SANTANA", "equip": [0, 2, 2, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0]}];
-const EQ_SHORT = ["Monitor altura","Base monitor","Sup. articulado","Prot. quina","Ap. teclado","Mouse Pad","Mesa em L","Mesa retang.","Cadeira Exec.","Apoio pés","Ap. lombar","Cadeira fixa","Mouse Ergon.","Sup. Notebook"];
-const EQ_FULL  = ["Monitor de vídeo com ajuste de altura da tela","Base de suporte elevatório para monitor de vídeo","Suporte de monitor de vídeo articulado","Protetor de \"quina viva\"","Apoio para teclado","Mouse Pad","Mesa em L","Mesa retangular","Cadeira Executiva","Apoio para os pés","Suporte de apoio lombar","Cadeira fixa","Mouse Ergonômico","Suporte para Notebook"];
-const COLORS = ['#22c5e0','#9b7ff5','#34c97e','#e88838','#e06aa0','#d9aa24','#5a92dc','#e05858','#2dd4a8','#c77ff5','#48b8e0','#9bd838','#e07838','#a87ff5'];
+// 68 zonas | 55 cidades | 573 itens | 14 categorias
+// ════════════════════════════════════════════════════════
 
+// ── CONSTANTES DE CONFIGURAÇÃO ──
 const TOTAL_ZONAS_BA = 180;
 const ZONAS_POR_MES  = 15;
 
-let activeFilter = 'all';   // city name or 'all'
-let activeView   = 'geral';
-let activeEqIdx  = -1;
+// ── BASE DE DADOS — não modificar ──
+const DB = [{"seq":1,"zona":22,"cidade":"JEQUIE","equip":[0,6,0,0,0,0,0,1,6,4,0,4,0,0]},{"seq":2,"zona":23,"cidade":"JEQUIE","equip":[0,0,0,0,0,0,0,0,4,0,0,0,0,0]},{"seq":3,"zona":147,"cidade":"ITAJIBA","equip":[0,1,0,0,0,0,0,0,5,2,0,0,0,1]},{"seq":4,"zona":39,"cidade":"VITORIA DA CONQUISTA","equip":[0,4,0,0,0,0,2,4,0,7,0,0,0,1]},{"seq":5,"zona":40,"cidade":"VITORIA DA CONQUISTA","equip":[0,0,0,0,0,0,3,0,0,4,0,0,0,1]},{"seq":6,"zona":41,"cidade":"VITORIA DA CONQUISTA","equip":[0,1,0,0,0,0,1,2,1,12,0,0,0,1]},{"seq":7,"zona":161,"cidade":"ANAGÉ","equip":[0,0,0,0,0,0,3,0,4,1,0,3,0,1]},{"seq":8,"zona":88,"cidade":"SEABRA","equip":[0,1,0,0,0,0,0,0,5,1,0,0,0,1]},{"seq":9,"zona":101,"cidade":"LIVRAMENTO NOSSA SENHORA","equip":[0,4,0,0,0,0,5,0,6,0,0,0,0,1]},{"seq":10,"zona":105,"cidade":"PIATÃ","equip":[0,0,0,0,0,0,0,0,0,0,0,0,0,1]},{"seq":11,"zona":65,"cidade":"MACAUBAS","equip":[0,0,0,0,0,0,4,0,3,0,0,0,0,0]},{"seq":12,"zona":111,"cidade":"PARAMIRIM","equip":[0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"seq":13,"zona":89,"cidade":"LENÇOIS","equip":[0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"seq":14,"zona":176,"cidade":"BARRA DO MENDES","equip":[0,1,0,0,0,0,1,3,1,1,0,0,0,0]},{"seq":15,"zona":174,"cidade":"CANARANA","equip":[0,0,0,0,0,0,0,0,0,1,0,0,0,0]},{"seq":16,"zona":46,"cidade":"JACOBINA","equip":[0,0,0,0,0,0,5,0,4,2,1,0,0,0]},{"seq":17,"zona":167,"cidade":"JACOBINA","equip":[0,1,0,0,0,0,4,0,1,3,0,0,0,0]},{"seq":18,"zona":36,"cidade":"AMARGOSA","equip":[0,1,0,0,0,0,0,0,1,3,0,0,0,1]},{"seq":19,"zona":160,"cidade":"SANTA BARBARA","equip":[0,0,0,0,0,0,0,0,0,0,0,0,1,1]},{"seq":20,"zona":110,"cidade":"RIBEIRA DO POMBAL","equip":[0,0,0,0,0,0,1,0,1,3,0,3,0,1]},{"seq":21,"zona":163,"cidade":"ALAGOINHAS","equip":[0,0,1,0,0,1,0,0,1,7,0,0,1,1]},{"seq":22,"zona":94,"cidade":"OLIVEIRA DOS BREJINHOS","equip":[0,0,0,0,0,0,1,1,4,2,1,0,2,0]},{"seq":23,"zona":70,"cidade":"BARREIRAS","equip":[0,6,0,0,0,0,0,0,6,2,0,0,0,0]},{"seq":24,"zona":135,"cidade":"COARACI","equip":[0,0,0,0,0,0,0,0,0,4,1,0,0,1]},{"seq":25,"zona":75,"cidade":"BARREIRAS","equip":[0,0,0,0,0,0,5,0,1,0,0,0,0,0]},{"seq":26,"zona":191,"cidade":"CAPIM GROSSO","equip":[0,3,0,0,0,0,0,0,0,2,0,0,0,1]},{"seq":27,"zona":87,"cidade":"RUY BARBOSA","equip":[0,2,0,0,0,0,0,0,0,2,1,0,0,1]},{"seq":28,"zona":139,"cidade":"BARRA DO CHOÇA","equip":[0,1,0,0,0,0,0,0,0,3,0,0,0,1]},{"seq":29,"zona":201,"cidade":"ITAMBÉ","equip":[0,1,0,0,0,0,2,0,1,1,0,0,0,0]},{"seq":30,"zona":140,"cidade":"ITAPETINGA","equip":[0,1,0,0,0,0,1,2,3,4,0,0,0,1]},{"seq":31,"zona":137,"cidade":"ITORORO","equip":[0,0,0,0,0,0,2,0,0,2,0,0,0,0]},{"seq":32,"zona":62,"cidade":"IPIRA","equip":[0,2,0,0,0,0,0,0,4,3,0,0,0,1]},{"seq":33,"zona":100,"cidade":"SÃO DESIDERIO","equip":[0,0,0,0,0,0,0,1,0,2,0,0,0,1]},{"seq":34,"zona":154,"cidade":"FEIRA DE SANTANA","equip":[0,5,0,0,0,0,0,0,4,4,2,0,0,0]},{"seq":35,"zona":155,"cidade":"FEIRA DE SANTANA","equip":[0,9,0,0,0,0,0,0,2,10,0,0,3,0]},{"seq":36,"zona":156,"cidade":"FEIRA DE SANTANA","equip":[0,0,0,0,0,0,0,0,1,4,0,0,0,0]},{"seq":37,"zona":90,"cidade":"BRUMADO","equip":[0,2,0,0,0,0,0,0,2,2,0,0,0,1]},{"seq":38,"zona":49,"cidade":"RIO REAL","equip":[0,3,1,0,0,0,0,0,0,3,0,0,0,1]},{"seq":39,"zona":52,"cidade":"PARAPIRANGA","equip":[0,1,0,0,0,0,1,1,5,4,0,5,0,2]},{"seq":40,"zona":158,"cidade":"CHORROCHO","equip":[0,2,0,0,0,0,0,3,0,3,0,0,0,0]},{"seq":41,"zona":99,"cidade":"SANTANA","equip":[0,3,0,0,0,0,3,1,3,0,0,0,0,0]},{"seq":42,"zona":54,"cidade":"MUNDO NOVO","equip":[0,4,0,0,0,0,2,0,0,1,0,0,0,0]},{"seq":43,"zona":136,"cidade":"ITAJUIPE","equip":[0,0,0,0,0,0,0,0,0,1,0,0,0,1]},{"seq":44,"zona":134,"cidade":"UBATA","equip":[0,0,0,0,0,0,2,0,0,3,0,0,0,0]},{"seq":45,"zona":73,"cidade":"UBAITABA","equip":[0,0,0,0,0,0,0,0,0,1,0,0,0,1]},{"seq":46,"zona":64,"cidade":"GUANAMBI","equip":[0,3,0,0,0,0,0,0,4,0,0,0,0,1]},{"seq":47,"zona":173,"cidade":"IBOTIRAMA","equip":[0,2,0,0,0,0,0,0,2,2,0,0,0,1]},{"seq":48,"zona":198,"cidade":"URUÇUCA","equip":[0,1,0,0,0,0,0,0,0,2,1,0,0,0]},{"seq":49,"zona":72,"cidade":"SANTA MARIA DA VITORIA","equip":[0,0,0,0,0,0,0,0,1,5,0,0,0,1]},{"seq":50,"zona":83,"cidade":"UAUA","equip":[0,0,0,0,0,0,4,0,1,3,0,0,0,1]},{"seq":51,"zona":166,"cidade":"BUERAREMA","equip":[0,0,1,0,0,0,4,0,2,1,1,0,0,1]},{"seq":52,"zona":56,"cidade":"SANTO ANTONIO DE JESUS","equip":[0,4,0,0,0,0,4,0,5,4,1,0,0,2]},{"seq":53,"zona":202,"cidade":"SANTO ANTONIO DE JESUS","equip":[0,1,0,0,0,0,2,0,1,2,3,0,0,0]},{"seq":54,"zona":151,"cidade":"GANDU","equip":[0,2,0,0,0,0,3,0,0,4,0,0,0,1]},{"seq":55,"zona":24,"cidade":"IPIAU","equip":[0,1,0,0,0,0,0,0,0,2,2,0,0,1]},{"seq":56,"zona":122,"cidade":"PORTO SEGURO","equip":[0,1,0,0,0,0,0,0,0,3,0,0,0,1]},{"seq":57,"zona":121,"cidade":"PORTO SEGURO","equip":[0,2,0,0,0,0,0,0,0,1,1,0,0,0]},{"seq":58,"zona":203,"cidade":"EUNAPOLIS","equip":[0,0,0,0,0,0,3,0,3,1,1,0,0,0]},{"seq":59,"zona":188,"cidade":"EUNAPOLIS","equip":[0,4,0,0,0,0,2,0,4,2,0,0,0,0]},{"seq":60,"zona":112,"cidade":"PRADO","equip":[0,1,0,0,0,0,3,0,1,0,0,0,0,1]},{"seq":61,"zona":35,"cidade":"MUCURI","equip":[0,0,0,0,0,0,0,0,0,0,0,0,0,0]},{"seq":62,"zona":189,"cidade":"ITABELA","equip":[0,0,0,0,0,0,0,0,0,3,0,0,0,0]},{"seq":63,"zona":25,"cidade":"ILHEUS","equip":[0,2,0,0,0,0,2,0,2,0,0,0,0,1]},{"seq":64,"zona":26,"cidade":"ILHEUS","equip":[0,3,0,0,0,0,1,2,0,1,1,0,0,1]},{"seq":65,"zona":28,"cidade":"ITABUNA","equip":[0,1,0,0,0,0,0,0,5,2,1,0,0,0]},{"seq":66,"zona":27,"cidade":"ITABUNA","equip":[0,7,0,0,0,0,0,1,5,5,1,0,0,1]},{"seq":67,"zona":133,"cidade":"CAMACA","equip":[0,1,0,0,0,0,5,1,5,0,0,0,0,0]},{"seq":68,"zona":157,"cidade":"FEIRA DE SANTANA","equip":[0,2,2,0,0,0,0,0,2,1,0,0,0,0]}];
 
-// ── COMPUTE ──
+// Índice 0 ("Monitor ajuste altura") = 0 em todos os registros — confirmado como dado real
+const EQ_SHORT = ["Mon. altura","Base monitor","Sup. articulado","Prot. quina","Ap. teclado","Mouse Pad","Mesa em L","Mesa retang.","Cadeira Exec.","Apoio pés","Ap. lombar","Cadeira fixa","Mouse Ergon.","Sup. Notebook"];
+const EQ_FULL  = ["Monitor de vídeo com ajuste de altura","Base de suporte elevatório para monitor","Suporte de monitor articulado","Protetor de quina viva","Apoio para teclado","Mouse Pad","Mesa em L","Mesa retangular","Cadeira Executiva","Apoio para os pés","Suporte de apoio lombar","Cadeira fixa","Mouse Ergonômico","Suporte para Notebook"];
+const COLORS   = ['#22c5e0','#9b7ff5','#34c97e','#e88838','#e06aa0','#d9aa24','#5a92dc','#e05858','#2dd4a8','#c77ff5','#48b8e0','#9bd838','#e07838','#a87ff5'];
+
+// ── ESTADO ──
+let activeFilter  = 'all';
+let activeView    = 'geral';
+let activeEqIdx   = -1;
+let kpiAnimated   = false;  // flag: animação dos KPIs só na carga inicial
+
+// ── HELPERS DE CÁLCULO ──
 function computeStats(db){
-  const cities={};
-  db.forEach(r=>{
-    if(!cities[r.cidade]) cities[r.cidade]={zonas:[],totals:new Array(14).fill(0)};
+  const cities = {};
+  db.forEach(r => {
+    if(!cities[r.cidade]) cities[r.cidade] = { zonas:[], totals:new Array(14).fill(0) };
     cities[r.cidade].zonas.push(r.zona);
-    r.equip.forEach((v,i)=>cities[r.cidade].totals[i]+=v);
+    r.equip.forEach((v,i) => cities[r.cidade].totals[i] += v);
   });
-  const eqTotals=new Array(14).fill(0);
-  db.forEach(r=>r.equip.forEach((v,i)=>eqTotals[i]+=v));
-  const grand=eqTotals.reduce((a,b)=>a+b,0);
-  const topIdx=eqTotals.indexOf(Math.max(...eqTotals));
-  const multi=Object.values(cities).filter(c=>c.zonas.length>1).length;
-  return {cities,eqTotals,grand,topIdx,multi,cityCount:Object.keys(cities).length};
+  const eqTotals = new Array(14).fill(0);
+  db.forEach(r => r.equip.forEach((v,i) => eqTotals[i] += v));
+  const grand  = eqTotals.reduce((a,b) => a+b, 0);
+  const topIdx = eqTotals.indexOf(Math.max(...eqTotals));
+  const multi  = Object.values(cities).filter(c => c.zonas.length > 1).length;
+  return { cities, eqTotals, grand, topIdx, multi, cityCount: Object.keys(cities).length };
 }
-function getFiltered(){ return activeFilter==='all'?DB:DB.filter(r=>r.cidade===activeFilter); }
-function cityArrFrom(s){ return Object.entries(s.cities).map(([n,d])=>({n,t:d.totals.reduce((a,b)=>a+b,0),zonas:d.zonas,totals:d.totals})).sort((a,b)=>b.t-a.t); }
+function getFiltered(){ return activeFilter === 'all' ? DB : DB.filter(r => r.cidade === activeFilter); }
+function cityArrFrom(s){ return Object.entries(s.cities).map(([n,d]) => ({n, t: d.totals.reduce((a,b)=>a+b,0), zonas: d.zonas, totals: d.totals})).sort((a,b) => b.t - a.t); }
 function prioOf(t){ return t>=20?['ALTA','#e05858']:t>=8?['MÉDIA','#d9aa24']:t>0?['BAIXA','#34c97e']:['—','#7a8aa0']; }
 
-// ── SVG DONUT HELPER ──
+// ── DONUT SVG ──
 function buildDonut(items, grand, R, cx, cy, sw){
-  let ang=0; const circ=2*Math.PI*R;
-  return items.map((it,i)=>{
-    const pct=grand>0?it.v/grand:0;
-    const dash=(pct*circ).toFixed(2), off=(-ang*R).toFixed(2);
-    ang+=pct*2*Math.PI;
+  let ang = 0; const circ = 2*Math.PI*R;
+  return items.map((it,i) => {
+    const pct = grand > 0 ? it.v/grand : 0;
+    const dash = (pct*circ).toFixed(2), off = (-ang*R).toFixed(2);
+    ang += pct*2*Math.PI;
     return `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${it.c}" stroke-width="${sw}" stroke-dasharray="${dash} ${circ.toFixed(2)}" stroke-dashoffset="${off}" opacity="0.85"/>`;
   }).join('');
 }
 
-// ── SWITCH VIEW ──
+// ── BARRAS HORIZONTAIS (helper reutilizável) ──
+function hbars(items, max, grand, onclickFn){
+  return items.map((it,idx) => `
+    <div class="bar-item">
+      <span class="bar-rank">${idx+1}</span>
+      <span class="bar-label" style="color:${it.c}" ${onclickFn ? `onclick="${onclickFn(it)}"` : ''} title="${it.full||it.label}">${it.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${max>0?(it.v/max*100).toFixed(1):0}%;background:${it.c};opacity:0.85"></div></div>
+      <span class="bar-val" style="color:${it.c}">${it.v}</span>
+      <span class="bar-pct" style="color:${it.c};opacity:0.78">${grand>0?(it.v/grand*100).toFixed(1):'0.0'}%</span>
+    </div>`).join('');
+}
+
+// ── NAVEGAÇÃO ──
 function switchView(v, el){
-  activeView=v;
-  document.querySelectorAll('.sb-nav-item').forEach(i=>i.classList.remove('active'));
+  activeView = v;
+  document.querySelectorAll('.sb-nav-item').forEach(i => i.classList.remove('active'));
   if(el) el.classList.add('active');
-  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-  document.getElementById('view-'+v)?.classList.add('active');
-  const titles={geral:'Painel Geral',prioridades:'Painel de Prioridades',municipios:'Ranking de Municípios',zonas:'Detalhamento por Zona',cidades:'Consolidado por Cidade',equipamento:'Distribuição por Equipamento',projecoes:'Estimativas e Projeções',relatorio:'Relatório Consolidado'};
-  document.getElementById('topbar-title').textContent=titles[v]||v;
-  document.getElementById('content-area').scrollTop=0;
+  document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+  const viewEl = document.getElementById('view-'+v);
+  if(viewEl){ viewEl.classList.add('active'); viewEl.classList.add('view-enter'); setTimeout(()=>viewEl.classList.remove('view-enter'),300); }
+  const titles = {geral:'Painel Geral',prioridades:'Painel de Prioridades',municipios:'Municípios',zonas:'Detalhamento por Zona',equipamento:'Por Equipamento',projecoes:'Estimativas e Projeções',relatorio:'Relatório Consolidado'};
+  document.getElementById('topbar-title').textContent = titles[v]||v;
+  document.getElementById('content-area').scrollTop = 0;
   renderActiveView();
 }
 
-// ── TOP-LEVEL RENDER ──
-function renderShared(){
-  const fdb=getFiltered(), s=computeStats(fdb);
-  document.getElementById('topbar-sub').textContent = activeFilter==='all'?'Todas as zonas · Bahia':`Filtro ativo: ${activeFilter}`;
-  document.getElementById('kpi-zonas').textContent=fdb.length;
-  document.getElementById('kpi-cidades').textContent=s.cityCount;
-  document.getElementById('kpi-total').textContent=s.grand.toLocaleString('pt-BR');
-  document.getElementById('kpi-multi').textContent=s.multi;
-  document.getElementById('nb-zonas').textContent=fdb.length;
-  document.getElementById('clear-btn').classList.toggle('active', activeFilter!=='all');
+function switchTab(group, tab, el){
+  document.querySelectorAll(`#view-${group} .tab-btn`).forEach(b => b.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.querySelectorAll(`#view-${group} .tab-pane`).forEach(p => p.classList.remove('active'));
+  document.getElementById(`${group}-tab-${tab}`)?.classList.add('active');
+  if(group==='mun' && tab==='ranking')    renderMunicipiosRanking();
+  if(group==='mun' && tab==='consolidado') renderMunicipiosConsolidado();
+}
 
-  // EQ STRIP — all equipment quick counts
-  const sortedAll=s.eqTotals.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v);
-  document.getElementById('eq-strip').innerHTML=sortedAll.map(({i,v})=>`
+function goToEquip(i){
+  activeEqIdx = i;
+  document.querySelectorAll('.sb-nav-item').forEach(x => x.classList.remove('active'));
+  document.querySelector('[data-view="equipamento"]').classList.add('active');
+  activeView = 'equipamento';
+  document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+  document.getElementById('view-equipamento').classList.add('active');
+  document.getElementById('topbar-title').textContent = 'Por Equipamento';
+  document.getElementById('content-area').scrollTop = 0;
+  renderShared(); renderEquipamento();
+}
+
+// ── RENDER COMPARTILHADO (KPIs + strip + footer) ──
+function renderShared(){
+  const fdb = getFiltered(), s = computeStats(fdb);
+
+  // footer e topbar-sub — dinâmicos
+  const coverPct = (DB.length / TOTAL_ZONAS_BA * 100).toFixed(1);
+  document.getElementById('sb-foot').textContent = `${DB.length} de ${TOTAL_ZONAS_BA} zonas avaliadas · ${coverPct}%`;
+  document.getElementById('topbar-sub').textContent = activeFilter === 'all' ? 'Todas as zonas · Bahia' : `Filtro ativo: ${activeFilter}`;
+
+  // KPIs — animação controlada por flag
+  document.getElementById('kpi-zonas').textContent   = fdb.length;
+  document.getElementById('kpi-cidades').textContent = s.cityCount;
+  document.getElementById('kpi-total').textContent   = s.grand.toLocaleString('pt-BR');
+  document.getElementById('kpi-multi').textContent   = s.multi;
+  document.getElementById('nb-zonas').textContent    = fdb.length;
+  document.getElementById('nb-mun').textContent      = s.cityCount;
+  document.getElementById('clear-btn').classList.toggle('active', activeFilter !== 'all');
+
+  if(!kpiAnimated){
+    document.getElementById('kpi-bar').classList.add('kpi-init');
+    setTimeout(()=>{ document.getElementById('kpi-bar').classList.remove('kpi-init'); }, 600);
+    kpiAnimated = true;
+  }
+
+  // Equipment strip
+  const sortedAll = s.eqTotals.map((v,i) => ({i,v})).filter(x => x.v > 0).sort((a,b) => b.v-a.v);
+  document.getElementById('eq-strip').innerHTML = sortedAll.map(({i,v}) => `
     <div class="eq-chip" onclick="goToEquip(${i})">
       <div class="eq-chip-dot" style="background:${COLORS[i]}"></div>
       <span class="eq-chip-name">${EQ_SHORT[i]}</span>
@@ -579,68 +641,62 @@ function renderShared(){
 
 function renderActiveView(){
   renderShared();
-  const map={geral:renderGeral,prioridades:renderPrioridades,municipios:renderMunicipios,zonas:renderZonas,cidades:renderCidades,equipamento:renderEquipamento,projecoes:renderProjecoes,relatorio:()=>{}};
+  const map = { geral:renderGeral, prioridades:renderPrioridades, municipios:renderMunicipios, zonas:renderZonas, equipamento:renderEquipamento, projecoes:renderProjecoes, relatorio:()=>{} };
   (map[activeView]||(()=>{}))();
 }
 
-function goToEquip(i){
-  activeEqIdx=i;
-  document.querySelectorAll('.sb-nav-item').forEach(x=>x.classList.remove('active'));
-  document.querySelector('[data-view="equipamento"]').classList.add('active');
-  activeView='equipamento';
-  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-  document.getElementById('view-equipamento').classList.add('active');
-  document.getElementById('topbar-title').textContent='Distribuição por Equipamento';
-  document.getElementById('content-area').scrollTop=0;
-  renderShared(); renderEquipamento();
+function setFilter(city){
+  activeFilter = (city === activeFilter) ? 'all' : city;
+  document.getElementById('city-search').value = activeFilter === 'all' ? '' : activeFilter;
+  renderActiveView();
+}
+function clearFilter(){
+  activeFilter = 'all'; activeEqIdx = -1;
+  document.getElementById('city-search').value  = '';
+  document.getElementById('zone-search').value  = '';
+  renderActiveView();
 }
 
-// ── HORIZONTAL BARS HELPER ──
-function hbars(items, max, grand, onclick){
-  return items.map((it,idx)=>`
-    <div class="bar-item">
-      <span class="bar-rank">${idx+1}</span>
-      <span class="bar-label" style="color:${it.c}" ${onclick?`onclick="${onclick(it)}"`:''} title="${it.full||it.label}">${it.label}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${max>0?(it.v/max*100).toFixed(1):0}%;background:${it.c};opacity:0.85"></div></div>
-      <span class="bar-val" style="color:${it.c}">${it.v}</span>
-      <span class="bar-pct" style="color:${it.c};opacity:0.78">${grand>0?(it.v/grand*100).toFixed(1):'0.0'}%</span>
-    </div>`).join('');
-}
+// ── BUSCA ──
+document.getElementById('city-search').addEventListener('input', function(){
+  const q = this.value.trim().toLowerCase();
+  if(!q){ activeFilter = 'all'; renderActiveView(); return; }
+  const cities = [...new Set(DB.map(r => r.cidade))];
+  const match = cities.find(c => c.toLowerCase()===q) || cities.find(c => c.toLowerCase().startsWith(q)) || cities.find(c => c.toLowerCase().includes(q));
+  if(match){ activeFilter = match; renderActiveView(); }
+});
+document.getElementById('zone-search').addEventListener('input', function(){
+  const q = this.value.trim();
+  if(!q){ activeFilter = 'all'; renderActiveView(); return; }
+  const match = DB.find(r => r.zona === parseInt(q));
+  if(match){ activeFilter = match.cidade; document.getElementById('city-search').value = match.cidade; renderActiveView(); }
+});
 
 // ════ PAINEL GERAL ════
 function renderGeral(){
-  const s=computeStats(getFiltered());
-  const cArr=cityArrFrom(s);
-
-  // EQ bars
-  const eqItems=s.eqTotals.map((v,i)=>({v,c:COLORS[i],label:EQ_SHORT[i],full:EQ_FULL[i],i})).sort((a,b)=>b.v-a.v);
-  document.getElementById('g-eq-bars').innerHTML=hbars(eqItems, eqItems[0].v, s.grand, it=>`goToEquip(${it.i})`);
-
-  // Donut top7
-  const top7=cArr.slice(0,7).map((c,i)=>({v:c.t,c:COLORS[i],n:c.n}));
-  document.getElementById('g-donut-center').textContent=s.grand;
-  document.getElementById('g-donut-badge').textContent=`${s.cityCount} cidades`;
-  document.getElementById('g-donut-arcs').innerHTML=buildDonut(top7,s.grand,58,75,75,20);
-  document.getElementById('g-donut-legend').innerHTML=top7.map(c=>`
-    <div class="legend-item" onclick="setFilter('${c.n}')"><div class="legend-dot" style="background:${c.c}"></div><span class="legend-label" style="color:${c.c}">${c.n}</span><span class="legend-val" style="color:${c.c}">${c.v}</span></div>`).join('');
-
-  // Mun ranking top10
+  const s = computeStats(getFiltered()), cArr = cityArrFrom(s);
+  const eqItems = s.eqTotals.map((v,i) => ({v,c:COLORS[i],label:EQ_SHORT[i],full:EQ_FULL[i],i})).sort((a,b) => b.v-a.v);
+  document.getElementById('g-eq-bars').innerHTML = hbars(eqItems, eqItems[0]?.v||1, s.grand, it=>`goToEquip(${it.i})`);
+  const top7 = cArr.slice(0,7).map((c,i) => ({v:c.t,c:COLORS[i],n:c.n}));
+  document.getElementById('g-donut-center').textContent = s.grand;
+  document.getElementById('g-donut-badge').textContent  = `${s.cityCount} cidades`;
+  document.getElementById('g-donut-arcs').innerHTML     = buildDonut(top7,s.grand,58,75,75,20);
+  document.getElementById('g-donut-legend').innerHTML   = top7.map(c=>`<div class="legend-item" onclick="setFilter('${c.n}')"><div class="legend-dot" style="background:${c.c}"></div><span class="legend-label" style="color:${c.c}">${c.n}</span><span class="legend-val" style="color:${c.c}">${c.v}</span></div>`).join('');
   renderRankList('g-mun-ranking', cArr.slice(0,10), cArr[0]?.t||1, s);
-
-  // Resumo
-  const top3=cArr.slice(0,3).map(c=>`<strong style="color:var(--cyan)">${c.n}</strong> (${c.t})`).join(', ');
-  const alta=cArr.filter(c=>c.t>=20).length, media=cArr.filter(c=>c.t>=8&&c.t<20).length, baixa=cArr.filter(c=>c.t>0&&c.t<8).length;
-  document.getElementById('g-resumo').innerHTML=`
+  const top3 = cArr.slice(0,3).map(c=>`<strong style="color:var(--cyan)">${c.n}</strong> (${c.t})`).join(', ');
+  const alta = cArr.filter(c=>c.t>=20).length, media = cArr.filter(c=>c.t>=8&&c.t<20).length, baixa = cArr.filter(c=>c.t>0&&c.t<8).length;
+  const coverPct = (DB.length / TOTAL_ZONAS_BA * 100).toFixed(1);
+  document.getElementById('g-resumo').innerHTML = `
     <p style="margin-bottom:10px">Levantamento de <strong style="color:var(--text-bright)">${getFiltered().length} zonas eleitorais</strong> em <strong style="color:var(--text-bright)">${s.cityCount} municípios</strong>, totalizando <strong style="color:var(--green)">${s.grand} equipamentos</strong> ergonômicos necessários.</p>
-    <p style="margin-bottom:10px">Item de maior demanda: <strong style="color:${COLORS[s.topIdx]}">${EQ_FULL[s.topIdx]}</strong> com ${s.eqTotals[s.topIdx]} unidades (${(s.eqTotals[s.topIdx]/s.grand*100).toFixed(1)}% do total).</p>
+    <p style="margin-bottom:10px">Item de maior demanda: <strong style="color:${COLORS[s.topIdx]}">${EQ_FULL[s.topIdx]}</strong> — ${s.eqTotals[s.topIdx]} unidades (${(s.eqTotals[s.topIdx]/s.grand*100).toFixed(1)}% do total).</p>
     <p style="margin-bottom:10px">Municípios de maior demanda: ${top3}.</p>
-    <p>Priorização: <strong style="color:var(--red)">${alta}</strong> de alta prioridade, <strong style="color:var(--yellow)">${media}</strong> de média e <strong style="color:var(--green)">${baixa}</strong> de baixa. Cobertura atual: <strong style="color:var(--cyan)">37,8%</strong> das 180 zonas da Bahia.</p>`;
+    <p>Priorização: <strong style="color:var(--red)">${alta}</strong> de alta prioridade, <strong style="color:var(--yellow)">${media}</strong> de média e <strong style="color:var(--green)">${baixa}</strong> de baixa. Cobertura atual: <strong style="color:var(--cyan)">${coverPct}%</strong> das ${TOTAL_ZONAS_BA} zonas da Bahia.</p>`;
 }
 
 function renderRankList(id, arr, maxT, s){
-  document.getElementById(id).innerHTML=arr.map((c,i)=>{
-    const rc=i===0?'#d9aa24':i===1?'#9aa8bc':i===2?'#e88838':COLORS[i%COLORS.length];
-    const zonas=(s.cities[c.n]?.zonas||c.zonas||[]).filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
+  document.getElementById(id).innerHTML = arr.map((c,i) => {
+    const rc = i===0?'#d9aa24':i===1?'#9aa8bc':i===2?'#e88838':COLORS[i%COLORS.length];
+    const zonas = (s.cities[c.n]?.zonas||c.zonas||[]).filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
     return `<div class="rank-item" onclick="setFilter('${c.n}')">
       <span class="rank-pos" style="color:${rc}">${i+1}º</span>
       <div class="rank-info"><div class="rank-city">${c.n}</div><div class="rank-zones">Zonas: ${zonas}</div></div>
@@ -652,28 +708,25 @@ function renderRankList(id, arr, maxT, s){
 
 // ════ PRIORIDADES ════
 function renderPrioridades(){
-  const s=computeStats(getFiltered());
-  const cArr=cityArrFrom(s);
-  const alta=cArr.filter(c=>c.t>=20),media=cArr.filter(c=>c.t>=8&&c.t<20),baixa=cArr.filter(c=>c.t>0&&c.t<8);
-  document.getElementById('p-prio-grid').innerHTML=[
-    ['ALTA',alta,'prio-alta','#e05858','≥ 20 itens'],['MÉDIA',media,'prio-media','#d9aa24','8–19 itens'],['BAIXA',baixa,'prio-baixa','#34c97e','1–7 itens']
-  ].map(([lbl,arr,cls,col,rng])=>`
+  const s = computeStats(getFiltered()), cArr = cityArrFrom(s);
+  const alta=cArr.filter(c=>c.t>=20), media=cArr.filter(c=>c.t>=8&&c.t<20), baixa=cArr.filter(c=>c.t>0&&c.t<8);
+  document.getElementById('p-prio-grid').innerHTML = [
+    ['ALTA',alta,'prio-alta','#e05858','≥ 20 itens'],
+    ['MÉDIA',media,'prio-media','#d9aa24','8–19 itens'],
+    ['BAIXA',baixa,'prio-baixa','#34c97e','1–7 itens']
+  ].map(([lbl,arr,cls,col,rng]) => `
     <div class="prio-card ${cls}">
       <div class="prio-header"><div class="prio-hdl"><div class="prio-dot" style="background:${col}"></div><span class="prio-title" style="color:${col}">${lbl} PRIORIDADE</span></div><span class="prio-range">${rng}</span></div>
       <div class="prio-count" style="color:${col}">${arr.length} <span style="font-size:13px;font-weight:400;color:var(--muted)">cidades</span></div>
       ${arr.slice(0,7).map(c=>`<div class="prio-item"><span class="prio-city" onclick="setFilter('${c.n}')">${c.n}</span><span class="prio-num" style="color:${col}">${c.t}</span></div>`).join('')}
       ${arr.length>7?`<div style="font-size:9px;color:var(--muted);margin-top:6px">+ ${arr.length-7} cidades</div>`:''}
     </div>`).join('');
-
-  // Critical equipment
-  const eqItems=s.eqTotals.map((v,i)=>({v,c:COLORS[i],label:EQ_SHORT[i],full:EQ_FULL[i],i})).sort((a,b)=>b.v-a.v).slice(0,8);
-  document.getElementById('p-eq-critical').innerHTML=hbars(eqItems,eqItems[0].v,s.grand,it=>`goToEquip(${it.i})`);
-
-  // Priority zones top12
-  const zArr=getFiltered().map(r=>({zona:r.zona,cidade:r.cidade,t:r.equip.reduce((a,b)=>a+b,0)})).sort((a,b)=>b.t-a.t).slice(0,12);
-  const maxZ=zArr[0]?.t||1;
-  document.getElementById('p-zonas-priority').innerHTML=zArr.map((z,i)=>{
-    const col=COLORS[i%COLORS.length];
+  const eqItems = s.eqTotals.map((v,i)=>({v,c:COLORS[i],label:EQ_SHORT[i],full:EQ_FULL[i],i})).sort((a,b)=>b.v-a.v).slice(0,8);
+  document.getElementById('p-eq-critical').innerHTML = hbars(eqItems, eqItems[0]?.v||1, s.grand, it=>`goToEquip(${it.i})`);
+  const zArr = getFiltered().map(r=>({zona:r.zona,cidade:r.cidade,t:r.equip.reduce((a,b)=>a+b,0)})).sort((a,b)=>b.t-a.t).slice(0,12);
+  const maxZ = zArr[0]?.t||1;
+  document.getElementById('p-zonas-priority').innerHTML = zArr.map((z,i) => {
+    const col = COLORS[i%COLORS.length];
     return `<div class="bar-item">
       <span class="bar-rank">${i+1}</span>
       <span class="bar-label" style="color:${col}" onclick="setFilter('${z.cidade}')">Z${z.zona||'—'} · ${z.cidade}</span>
@@ -681,55 +734,45 @@ function renderPrioridades(){
       <span class="bar-val" style="color:${col}">${z.t}</span>
     </div>`;
   }).join('');
-
-  // Pareto
-  const eqSorted=s.eqTotals.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0);
-  let cum=0;
-  document.getElementById('p-pareto').innerHTML=eqSorted.map((e,idx)=>{
-    cum+=e.v; const cumPct=s.grand>0?cum/s.grand*100:0;
-    const col=COLORS[e.i];
+  const eqSorted = s.eqTotals.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0);
+  let cum = 0;
+  document.getElementById('p-pareto').innerHTML = eqSorted.map((e,idx) => {
+    cum += e.v; const cumPct = s.grand > 0 ? cum/s.grand*100 : 0;
+    const col = COLORS[e.i];
     return `<div class="bar-item">
       <span class="bar-rank">${idx+1}</span>
       <span class="bar-label" style="color:${col}" onclick="goToEquip(${e.i})">${EQ_SHORT[e.i]}</span>
       <div class="bar-track"><div class="bar-fill" style="width:${(e.v/eqSorted[0].v*100).toFixed(1)}%;background:${col};opacity:0.85"></div></div>
       <span class="bar-val" style="color:${col}">${e.v}</span>
-      <span class="bar-pct" style="color:var(--muted)">∑ ${cumPct.toFixed(0)}%</span>
+      <span class="bar-pct" style="color:var(--muted)">∑${cumPct.toFixed(0)}%</span>
     </div>`;
   }).join('');
 }
 
 // ════ MUNICÍPIOS ════
 function renderMunicipios(){
-  const s=computeStats(getFiltered());
-  const eqFilter=parseInt(document.getElementById('m-eq-filter').value);
-
-  // populate filter once
-  const sel=document.getElementById('m-eq-filter');
-  if(sel.options.length<=1){
-    s.eqTotals.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=EQ_FULL[i]; sel.appendChild(o); });
-  }
-
-  let cArr=cityArrFrom(s);
-  if(eqFilter>=0){ cArr=Object.entries(s.cities).map(([n,d])=>({n,t:d.totals[eqFilter],zonas:d.zonas,totals:d.totals})).filter(c=>c.t>0).sort((a,b)=>b.t-a.t); }
-  const grandRef=eqFilter>=0?s.eqTotals[eqFilter]:s.grand;
-
-  // Bars top 15
-  const items=cArr.slice(0,15).map((c,i)=>({v:c.t,c:COLORS[i%COLORS.length],label:c.n,n:c.n}));
-  document.getElementById('m-ranking-bars').innerHTML=hbars(items, items[0]?.v||1, grandRef, it=>`setFilter('${it.n}')`);
-
-  // Donut top7
-  const top7=cArr.slice(0,7).map((c,i)=>({v:c.t,c:COLORS[i],n:c.n}));
-  document.getElementById('m-donut-center').textContent=grandRef;
-  document.getElementById('m-donut-label').textContent=eqFilter>=0?EQ_SHORT[eqFilter]:'itens';
-  document.getElementById('m-donut-arcs').innerHTML=buildDonut(top7,grandRef,58,75,75,20);
-  document.getElementById('m-donut-legend').innerHTML=top7.map(c=>`<div class="legend-item" onclick="setFilter('${c.n}')"><div class="legend-dot" style="background:${c.c}"></div><span class="legend-label" style="color:${c.c}">${c.n}</span><span class="legend-val" style="color:${c.c}">${c.v}</span></div>`).join('');
-
-  // Table
-  document.getElementById('m-table-badge').textContent=`${cArr.length} cidades`;
-  document.getElementById('m-table-body').innerHTML=cArr.map((c,i)=>{
-    const zonas=c.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
-    const pct=grandRef>0?(c.t/grandRef*100).toFixed(1):0;
-    const p=prioOf(c.t);
+  renderMunicipiosRanking();
+}
+function renderMunicipiosRanking(){
+  const s = computeStats(getFiltered());
+  const eqFilter = parseInt(document.getElementById('m-eq-filter').value);
+  const sel = document.getElementById('m-eq-filter');
+  if(sel.options.length <= 1){ s.eqTotals.forEach((v,i) => { const o=document.createElement('option'); o.value=i; o.textContent=EQ_FULL[i]; sel.appendChild(o); }); }
+  let cArr = cityArrFrom(s);
+  if(eqFilter >= 0){ cArr = Object.entries(s.cities).map(([n,d])=>({n,t:d.totals[eqFilter],zonas:d.zonas,totals:d.totals})).filter(c=>c.t>0).sort((a,b)=>b.t-a.t); }
+  const grandRef = eqFilter >= 0 ? s.eqTotals[eqFilter] : s.grand;
+  const items = cArr.slice(0,15).map((c,i) => ({v:c.t,c:COLORS[i%COLORS.length],label:c.n,n:c.n}));
+  document.getElementById('m-ranking-bars').innerHTML = hbars(items, items[0]?.v||1, grandRef, it=>`setFilter('${it.n}')`);
+  const top7 = cArr.slice(0,7).map((c,i) => ({v:c.t,c:COLORS[i],n:c.n}));
+  document.getElementById('m-donut-center').textContent = grandRef;
+  document.getElementById('m-donut-label').textContent  = eqFilter >= 0 ? EQ_SHORT[eqFilter] : 'itens';
+  document.getElementById('m-donut-arcs').innerHTML     = buildDonut(top7,grandRef,58,75,75,20);
+  document.getElementById('m-donut-legend').innerHTML   = top7.map(c=>`<div class="legend-item" onclick="setFilter('${c.n}')"><div class="legend-dot" style="background:${c.c}"></div><span class="legend-label" style="color:${c.c}">${c.n}</span><span class="legend-val" style="color:${c.c}">${c.v}</span></div>`).join('');
+  document.getElementById('m-table-badge').textContent  = `${cArr.length} cidades`;
+  document.getElementById('m-table-body').innerHTML = cArr.map((c,i) => {
+    const zonas = c.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
+    const pct = grandRef > 0 ? (c.t/grandRef*100).toFixed(1) : 0;
+    const p = prioOf(c.t);
     return `<tr>
       <td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--muted)">${i+1}º</td>
       <td style="cursor:pointer;font-weight:500" onclick="setFilter('${c.n}')">${c.n}</td>
@@ -740,353 +783,302 @@ function renderMunicipios(){
     </tr>`;
   }).join('');
 }
-
-// ════ ZONAS ════
-function renderZonas(){
-  const fdb=getFiltered(), s=computeStats(fdb);
-  const multiC={}; DB.forEach(r=>{multiC[r.cidade]=(multiC[r.cidade]||0)+1;});
-
-  const hero=document.getElementById('z-detail-hero');
-  if(activeFilter!=='all' && s.cities[activeFilter]){
-    const st=s.cities[activeFilter], tot=st.totals.reduce((a,b)=>a+b,0);
-    const zonas=st.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
-    const topEq=st.totals.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,3);
-    hero.style.display='block';
-    hero.innerHTML=`<h2>${activeFilter}</h2><p>Zonas eleitorais: <strong style="color:var(--cyan)">${zonas}</strong></p>
-      <div class="detail-kpis"><div class="dk"><div class="dk-val" style="color:var(--cyan)">${fdb.length}</div><div class="dk-lbl">Zonas</div></div><div class="dk"><div class="dk-val" style="color:var(--green)">${tot}</div><div class="dk-lbl">Total itens</div></div>${topEq.map(({v,i})=>`<div class="dk"><div class="dk-val" style="color:${COLORS[i]}">${v}</div><div class="dk-lbl">${EQ_SHORT[i]}</div></div>`).join('')}</div>`;
-  } else hero.style.display='none';
-
-  const sorted=[...fdb].sort((a,b)=>b.equip.reduce((s,v)=>s+v,0)-a.equip.reduce((s,v)=>s+v,0));
-  document.getElementById('z-table-badge').textContent=`${fdb.length} zonas`;
-  document.getElementById('z-table-body').innerHTML=sorted.map(r=>{
-    const tot=r.equip.reduce((a,b)=>a+b,0);
-    const col=COLORS[tot>30?0:tot>15?1:tot>8?2:tot>3?3:13];
-    const eqList=r.equip.map((v,i)=>v>0?`<span style="font-size:10px;color:${COLORS[i]};font-weight:600">${EQ_SHORT[i]}&nbsp;<strong style="font-family:'JetBrains Mono',monospace">${v}</strong></span>`:'').filter(Boolean).join('<span style="color:var(--muted);margin:0 3px">·</span>');
-    return `<tr><td>${r.zona>0?`<span class="zona-badge">${r.zona}</span>`:`<span class="zona-badge" style="opacity:0.35">—</span>`}</td><td><span style="font-weight:500">${r.cidade}</span>${multiC[r.cidade]>1?'<span class="multi-badge">MULTI</span>':''}</td><td style="line-height:1.9">${eqList||'<span style="color:var(--muted);font-size:10px">sem demanda</span>'}</td><td><span class="total-pill" style="background:${col}18;color:${col};border:1px solid ${col}35">${tot}</span></td></tr>`;
+function renderMunicipiosConsolidado(){
+  const s = computeStats(getFiltered()), cArr = cityArrFrom(s);
+  const items = cArr.slice(0,15).map((c,i) => ({v:c.t,c:COLORS[i%COLORS.length],label:c.n,n:c.n}));
+  document.getElementById('c-bars').innerHTML = hbars(items, items[0]?.v||1, s.grand, it=>`setFilter('${it.n}')`);
+  const multi = cArr.filter(c => c.zonas.filter(z=>z>0).length > 1);
+  document.getElementById('c-multizona').innerHTML = multi.map(c => {
+    const zonas = c.zonas.filter(z=>z>0).sort((a,b)=>a-b);
+    return `<div class="rank-item" onclick="setFilter('${c.n}')">
+      <div class="rank-info"><div class="rank-city">${c.n}</div><div class="rank-zones">${zonas.length} zonas: ${zonas.join(', ')}</div></div>
+      <span class="rank-val" style="color:var(--purple)">${c.t}</span>
+    </div>`;
+  }).join('')||'<div style="color:var(--muted);font-size:11px;padding:10px">Nenhuma cidade multizona no filtro atual</div>';
+  document.getElementById('c-table-badge').textContent = `${cArr.length} cidades`;
+  document.getElementById('c-table-body').innerHTML = cArr.map((c,i) => {
+    const zonas = c.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
+    const pct = s.grand > 0 ? (c.t/s.grand*100).toFixed(1) : 0;
+    const col = COLORS[i%COLORS.length];
+    return `<tr>
+      <td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--muted)">${i+1}º</td>
+      <td style="cursor:pointer;font-weight:500" onclick="setFilter('${c.n}')"><div style="display:flex;align-items:center;gap:7px"><div style="width:7px;height:7px;border-radius:50%;background:${col}"></div>${c.n}</div></td>
+      <td style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">${zonas}</td>
+      <td style="text-align:center;font-family:'JetBrains Mono',monospace">${c.zonas.filter(z=>z>0).length||c.zonas.length}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--text-bright)">${c.t}</td>
+      <td><div class="mini-bar"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%;background:${col}"></div></div><span style="font-size:10px;color:var(--muted)">${pct}%</span></div></td>
+    </tr>`;
   }).join('');
+}
 
-  // Top 15 ranking
-  const zRank=sorted.slice(0,15).map((r,i)=>({zona:r.zona,cidade:r.cidade,t:r.equip.reduce((a,b)=>a+b,0)}));
-  const maxZ=zRank[0]?.t||1;
-  document.getElementById('z-ranking').innerHTML=zRank.map((z,i)=>{
-    const col=COLORS[i%COLORS.length];
-    const rc=i===0?'#d9aa24':i===1?'#9aa8bc':i===2?'#e88838':col;
+// ════ DETALHAMENTO ZONA ════
+function renderZonas(){
+  const fdb = getFiltered(), s = computeStats(fdb);
+  const multiC = {}; DB.forEach(r => { multiC[r.cidade] = (multiC[r.cidade]||0)+1; });
+  const hero = document.getElementById('z-detail-hero');
+  if(activeFilter !== 'all' && s.cities[activeFilter]){
+    const st = s.cities[activeFilter], tot = st.totals.reduce((a,b)=>a+b,0);
+    const zonas = st.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
+    const topEq = st.totals.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,3);
+    hero.style.display = 'block';
+    hero.innerHTML = `<h2>${activeFilter}</h2><p>Zonas eleitorais: <strong style="color:var(--cyan)">${zonas}</strong></p>
+      <div class="detail-kpis"><div class="dk"><div class="dk-val" style="color:var(--cyan)">${fdb.length}</div><div class="dk-lbl">Zonas</div></div><div class="dk"><div class="dk-val" style="color:var(--green)">${tot}</div><div class="dk-lbl">Total itens</div></div>${topEq.map(({v,i})=>`<div class="dk"><div class="dk-val" style="color:${COLORS[i]}">${v}</div><div class="dk-lbl">${EQ_SHORT[i]}</div></div>`).join('')}</div>`;
+  } else hero.style.display = 'none';
+  const sorted = [...fdb].sort((a,b) => b.equip.reduce((s,v)=>s+v,0) - a.equip.reduce((s,v)=>s+v,0));
+  document.getElementById('z-table-badge').textContent = `${fdb.length} zonas`;
+  document.getElementById('z-table-body').innerHTML = sorted.map(r => {
+    const tot = r.equip.reduce((a,b)=>a+b,0);
+    const col = COLORS[tot>30?0:tot>15?1:tot>8?2:tot>3?3:13];
+    const eqList = r.equip.map((v,i) => v>0 ? `<span style="font-size:10px;color:${COLORS[i]};font-weight:600">${EQ_SHORT[i]}&nbsp;<strong style="font-family:'JetBrains Mono',monospace">${v}</strong></span>` : '').filter(Boolean).join('<span style="color:var(--muted);margin:0 3px">·</span>');
+    return `<tr>
+      <td>${r.zona>0?`<span class="zona-badge">${r.zona}</span>`:`<span class="zona-badge" style="opacity:0.35">—</span>`}</td>
+      <td><span style="font-weight:500">${r.cidade}</span>${multiC[r.cidade]>1?'<span class="multi-badge">MULTI</span>':''}</td>
+      <td style="line-height:1.9">${eqList||'<span style="color:var(--muted);font-size:10px">sem demanda</span>'}</td>
+      <td><span class="total-pill" style="background:${col}18;color:${col};border:1px solid ${col}35">${tot}</span></td>
+    </tr>`;
+  }).join('');
+  const zRank = sorted.slice(0,15).map(r => ({zona:r.zona,cidade:r.cidade,t:r.equip.reduce((a,b)=>a+b,0)}));
+  const maxZ = zRank[0]?.t||1;
+  document.getElementById('z-ranking').innerHTML = zRank.map((z,i) => {
+    const col = COLORS[i%COLORS.length];
+    const rc  = i===0?'#d9aa24':i===1?'#9aa8bc':i===2?'#e88838':col;
     return `<div class="rank-item" onclick="setFilter('${z.cidade}')">
       <span class="rank-pos" style="color:${rc}">${i+1}º</span>
       <div class="rank-info"><div class="rank-city">Zona ${z.zona||'—'}</div><div class="rank-zones">${z.cidade}</div></div>
       <div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:${(z.t/maxZ*100).toFixed(0)}%;background:${col}"></div></div></div>
-      <span class="rank-val" style="color:${col}">${z.t}</span></div>`;
+      <span class="rank-val" style="color:${col}">${z.t}</span>
+    </div>`;
   }).join('');
 }
 
-// ════ CIDADES ════
-function renderCidades(){
-  const s=computeStats(getFiltered());
-  const cArr=cityArrFrom(s);
-
-  // Bars top15
-  const items=cArr.slice(0,15).map((c,i)=>({v:c.t,c:COLORS[i%COLORS.length],label:c.n,n:c.n}));
-  document.getElementById('c-bars').innerHTML=hbars(items,items[0]?.v||1,s.grand,it=>`setFilter('${it.n}')`);
-
-  // Multizona
-  const multi=cArr.filter(c=>c.zonas.filter(z=>z>0).length>1 || c.zonas.length>1);
-  document.getElementById('c-multizona').innerHTML=multi.map(c=>{
-    const zonas=c.zonas.filter(z=>z>0).sort((a,b)=>a-b);
-    return `<div class="rank-item" onclick="setFilter('${c.n}')">
-      <div class="rank-info"><div class="rank-city">${c.n}</div><div class="rank-zones">${zonas.length} zonas: ${zonas.join(', ')}</div></div>
-      <span class="rank-val" style="color:var(--purple)">${c.t}</span></div>`;
-  }).join('')||'<div style="color:var(--muted);font-size:11px;padding:10px">Nenhuma cidade multizona no filtro atual</div>';
-
-  // Table
-  document.getElementById('c-table-badge').textContent=`${cArr.length} cidades`;
-  document.getElementById('c-table-body').innerHTML=cArr.map((c,i)=>{
-    const zonas=c.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
-    const pct=s.grand>0?(c.t/s.grand*100).toFixed(1):0;
-    const col=COLORS[i%COLORS.length];
-    return `<tr><td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--muted)">${i+1}º</td><td style="cursor:pointer;font-weight:500" onclick="setFilter('${c.n}')"><div style="display:flex;align-items:center;gap:7px"><div style="width:7px;height:7px;border-radius:50%;background:${col}"></div>${c.n}</div></td><td style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">${zonas}</td><td style="text-align:center;font-family:'JetBrains Mono',monospace">${c.zonas.filter(z=>z>0).length||c.zonas.length}</td><td style="font-family:'JetBrains Mono',monospace;font-weight:800;color:var(--text-bright)">${c.t}</td><td><div class="mini-bar"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%;background:${col}"></div></div><span style="font-size:10px;color:var(--muted)">${pct}%</span></div></td></tr>`;
-  }).join('');
-}
-
-// ════ EQUIPAMENTO ════
+// ════ POR EQUIPAMENTO ════
 function renderEquipamento(){
-  const s=computeStats(getFiltered());
-  const grand=s.grand||1;
-  const sorted=s.eqTotals.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v);
-  document.getElementById('e-donut-grid').innerHTML=sorted.map(({i,v})=>{
-    const pct=grand>0?v/grand:0, col=COLORS[i], R=30,cx=38,cy=38,circ=2*Math.PI*R;
+  const s = computeStats(getFiltered()), grand = s.grand||1;
+  const sorted = s.eqTotals.map((v,i) => ({i,v})).sort((a,b) => b.v-a.v);
+  document.getElementById('e-donut-grid').innerHTML = sorted.map(({i,v}) => {
+    const pct = grand>0?v/grand:0, col=COLORS[i], R=30,cx=38,cy=38,circ=2*Math.PI*R;
     const dash=(pct*circ).toFixed(2), gap=(circ*(1-pct)).toFixed(2);
-    const isAct=activeEqIdx===i;
-    return `<div onclick="selectEquip(${i})" style="display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 6px;background:${isAct?col+'1a':'rgba(255,255,255,0.02)'};border:1px solid ${isAct?col+'55':'rgba(255,255,255,0.06)'};border-radius:12px;transition:all 0.2s;cursor:pointer">
+    const isAct = activeEqIdx===i;
+    return `<div onclick="selectEquip(${i})" style="display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 6px;background:${isAct?col+'1a':'rgba(255,255,255,0.02)'};border:1px solid ${isAct?col+'55':'rgba(255,255,255,0.06)'};border-radius:12px;cursor:pointer;transition:all 0.2s">
       <svg width="76" height="76" viewBox="0 0 76 76"><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="9"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${col}" stroke-width="9" stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${(circ/4).toFixed(2)}" stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})" opacity="0.88"/><text x="${cx}" y="${cy-3}" text-anchor="middle" fill="${col}" font-size="15" font-weight="800" font-family="JetBrains Mono">${v}</text><text x="${cx}" y="${cy+10}" text-anchor="middle" fill="#7a8aa0" font-size="8" font-family="Sora">${(v/grand*100).toFixed(1)}%</text></svg>
-      <div style="font-size:9px;color:${col};font-weight:600;text-align:center;line-height:1.3;word-break:break-word;max-width:84px">${EQ_SHORT[i]}</div></div>`;
+      <div style="font-size:9px;color:${col};font-weight:600;text-align:center;line-height:1.3;word-break:break-word;max-width:84px">${EQ_SHORT[i]}</div>
+    </div>`;
   }).join('');
-
-  if(activeEqIdx<0){ document.getElementById('e-detail').style.display='none'; return; }
-  const i=activeEqIdx, col=COLORS[i], total=s.eqTotals[i];
-  document.getElementById('e-detail').style.display='block';
-
-  // city ranking
-  const cArr=Object.entries(s.cities).map(([n,d])=>({n,t:d.totals[i],zonas:d.zonas})).filter(c=>c.t>0).sort((a,b)=>b.t-a.t);
-  // zona ranking
-  const zArr=getFiltered().map(r=>({zona:r.zona,cidade:r.cidade,t:r.equip[i]})).filter(z=>z.t>0).sort((a,b)=>b.t-a.t);
-
-  document.getElementById('e-hero').innerHTML=`<h2 style="color:${col}">${EQ_FULL[i]}</h2><p>${cArr.length} cidades · ${zArr.length} zonas com demanda</p>
-    <div class="detail-kpis"><div class="dk"><div class="dk-val" style="color:${col}">${total}</div><div class="dk-lbl">Total solicitado</div></div><div class="dk"><div class="dk-val" style="color:${col}">${(total/s.grand*100).toFixed(1)}%</div><div class="dk-lbl">Do total geral</div></div><div class="dk"><div class="dk-val" style="color:${col}">${cArr.length}</div><div class="dk-lbl">Cidades</div></div><div class="dk"><div class="dk-val" style="color:${col}">${cArr[0]?.t||0}</div><div class="dk-lbl">Líder<br><small>${cArr[0]?.n||'—'}</small></div></div></div>`;
-
-  const cItems=cArr.slice(0,12).map(c=>({v:c.t,c:col,label:c.n,n:c.n}));
-  document.getElementById('e-city-title').textContent=`Cidades — ${EQ_SHORT[i]}`;
-  document.getElementById('e-city-badge').textContent=`${cArr.length} cidades`;
-  document.getElementById('e-city-bars').innerHTML=hbars(cItems,cItems[0]?.v||1,total,it=>`setFilter('${it.n}')`);
-
-  const zItems=zArr.slice(0,15).map(z=>({v:z.t,c:col,label:`Z${z.zona||'—'} · ${z.cidade}`}));
-  document.getElementById('e-zona-title').textContent=`Zonas — ${EQ_SHORT[i]}`;
-  document.getElementById('e-zona-badge').textContent=`${zArr.length} zonas`;
-  document.getElementById('e-zona-bars').innerHTML=hbars(zItems,zItems[0]?.v||1,total,null);
-
-  document.getElementById('e-table-badge').textContent=`${cArr.length} cidades`;
-  document.getElementById('e-table-body').innerHTML=cArr.map((c,ri)=>{
-    const zonas=c.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
-    const pct=total>0?(c.t/total*100).toFixed(1):0;
+  if(activeEqIdx < 0){ document.getElementById('e-detail').style.display='none'; return; }
+  const i = activeEqIdx, col = COLORS[i], total = s.eqTotals[i];
+  document.getElementById('e-detail').style.display = 'block';
+  const cArr = Object.entries(s.cities).map(([n,d]) => ({n,t:d.totals[i],zonas:d.zonas})).filter(c=>c.t>0).sort((a,b)=>b.t-a.t);
+  const zArr = getFiltered().map(r => ({zona:r.zona,cidade:r.cidade,t:r.equip[i]})).filter(z=>z.t>0).sort((a,b)=>b.t-a.t);
+  document.getElementById('e-hero').innerHTML = `<h2 style="color:${col}">${EQ_FULL[i]}</h2><p>${cArr.length} cidades · ${zArr.length} zonas com demanda</p>
+    <div class="detail-kpis">
+      <div class="dk"><div class="dk-val" style="color:${col}">${total}</div><div class="dk-lbl">Total solicitado</div></div>
+      <div class="dk"><div class="dk-val" style="color:${col}">${(total/s.grand*100).toFixed(1)}%</div><div class="dk-lbl">Do total geral</div></div>
+      <div class="dk"><div class="dk-val" style="color:${col}">${cArr.length}</div><div class="dk-lbl">Cidades</div></div>
+      <div class="dk"><div class="dk-val" style="color:${col}">${cArr[0]?.t||0}</div><div class="dk-lbl">Líder<br><small>${cArr[0]?.n||'—'}</small></div></div>
+    </div>`;
+  document.getElementById('e-city-title').textContent = `Cidades — ${EQ_SHORT[i]}`;
+  document.getElementById('e-city-badge').textContent = `${cArr.length} cidades`;
+  document.getElementById('e-city-bars').innerHTML    = hbars(cArr.slice(0,12).map(c=>({v:c.t,c:col,label:c.n,n:c.n})), cArr[0]?.t||1, total, it=>`setFilter('${it.n}')`);
+  document.getElementById('e-zona-title').textContent = `Zonas — ${EQ_SHORT[i]}`;
+  document.getElementById('e-zona-badge').textContent = `${zArr.length} zonas`;
+  document.getElementById('e-zona-bars').innerHTML    = hbars(zArr.slice(0,15).map(z=>({v:z.t,c:col,label:`Z${z.zona||'—'} · ${z.cidade}`})), zArr[0]?.t||1, total, null);
+  document.getElementById('e-table-badge').textContent = `${cArr.length} cidades`;
+  document.getElementById('e-table-body').innerHTML = cArr.map((c,ri) => {
+    const zonas = c.zonas.filter(z=>z>0).sort((a,b)=>a-b).join(', ')||'—';
+    const pct = total > 0 ? (c.t/total*100).toFixed(1) : 0;
     return `<tr><td style="text-align:center;color:var(--muted);font-family:'JetBrains Mono',monospace">${ri+1}º</td><td style="cursor:pointer;font-weight:500" onclick="setFilter('${c.n}')">${c.n}</td><td style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">${zonas}</td><td style="font-family:'JetBrains Mono',monospace;font-weight:800;color:${col}">${c.t}</td><td><div class="mini-bar"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%;background:${col}"></div></div><span style="font-size:10px;color:var(--muted)">${pct}%</span></div></td></tr>`;
   }).join('');
 }
-function selectEquip(i){ activeEqIdx=activeEqIdx===i?-1:i; renderEquipamento(); }
+function selectEquip(i){ activeEqIdx = (activeEqIdx===i) ? -1 : i; renderEquipamento(); }
 
-// ════ PROJEÇÕES ════
+// ════ ESTIMATIVAS ════
 function computeProjections(){
-  const s=computeStats(DB);
-  const zonasAval=DB.length;            // 68
-  const proj=[];
-  EQ_FULL.forEach((name,i)=>{
-    const perZone=DB.map(r=>r.equip[i]);
-    const obs=s.eqTotals[i];
-    const mean=obs/zonasAval;
-    const variance=perZone.reduce((a,v)=>a+Math.pow(v-mean,2),0)/(zonasAval-1); // variância amostral
-    const sd=Math.sqrt(variance);
-    const projection=Math.round(mean*TOTAL_ZONAS_BA);
-    // IC 95% com correção de população finita (amostra de 68 das 180 zonas conhecidas)
-    const fpc=Math.sqrt((TOTAL_ZONAS_BA-zonasAval)/(TOTAL_ZONAS_BA-1));
-    const se=sd/Math.sqrt(zonasAval);
-    const margin=Math.round(1.96*se*TOTAL_ZONAS_BA*fpc);
-    const freq=perZone.filter(v=>v>0).length/zonasAval; // frequency of occurrence
-    proj.push({i,name,short:EQ_SHORT[i],obs,mean,sd,projection,low:Math.max(projection-margin,obs),high:projection+margin,freq});
+  const s = computeStats(DB);
+  const n = DB.length, N = TOTAL_ZONAS_BA;
+  return EQ_FULL.map((name,i) => {
+    const perZone = DB.map(r => r.equip[i]);
+    const obs = s.eqTotals[i];
+    const mean = obs/n;
+    const variance = perZone.reduce((a,v) => a + Math.pow(v-mean,2), 0) / (n-1);
+    const sd   = Math.sqrt(variance);
+    const proj = Math.round(mean * N);
+    const fpc  = Math.sqrt((N-n)/(N-1));
+    const se   = sd / Math.sqrt(n);
+    const margin = Math.round(1.96 * se * N * fpc);
+    return { i, name, short:EQ_SHORT[i], obs, mean, sd, projection:proj, low:Math.max(proj-margin,obs), high:proj+margin };
   });
-  return proj;
-}
-
-function renderProjecoes(){
-  const proj=computeProjections().sort((a,b)=>b.projection-a.projection);
-  const totalProj=proj.reduce((a,p)=>a+p.projection,0);
-  document.getElementById('pr-total-proj').textContent=totalProj.toLocaleString('pt-BR');
-
-  // Table
-  document.getElementById('pr-table-body').innerHTML=proj.filter(p=>p.obs>0).map(p=>`
-    <tr><td style="font-weight:500">${p.name}</td>
-    <td style="text-align:center;font-family:'JetBrains Mono',monospace">${p.obs}</td>
-    <td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--text-bright)">${p.mean.toFixed(2)}</td>
-    <td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--muted)">${p.sd.toFixed(2)}</td>
-    <td style="text-align:center"><span class="proj-highlight">${p.projection}</span></td>
-    <td style="text-align:center"><span class="proj-ci">${p.low} – ${p.high}</span></td></tr>`).join('');
-
-  // Projected ranking bars
-  const items=proj.filter(p=>p.projection>0).slice(0,12).map(p=>({v:p.projection,c:COLORS[p.i],label:p.short,i:p.i}));
-  const maxP=items[0]?.v||1;
-  document.getElementById('pr-proj-bars').innerHTML=items.map((it,idx)=>`
-    <div class="bar-item"><span class="bar-rank">${idx+1}</span>
-    <span class="bar-label" style="color:${it.c}" onclick="goToEquip(${it.i})">${it.label}</span>
-    <div class="bar-track"><div class="bar-fill" style="width:${(it.v/maxP*100).toFixed(1)}%;background:${it.c};opacity:0.85"></div></div>
-    <span class="bar-val" style="color:${it.c}">${it.v}</span>
-    <span class="bar-pct" style="color:${it.c};opacity:0.78">${(it.v/totalProj*100).toFixed(1)}%</span></div>`).join('');
-
-  // Timeline / cronograma — start August, 15 zones/month, pause during election
-  const sched=buildSchedule();
-  const maxAcc=180;
-  document.getElementById('pr-timeline').innerHTML=sched.map(m=>{
-    const pct=m.acc/maxAcc*100;
-    const col=m.pause?'#7a8aa0':m.acc>=180?'#34c97e':'#22c5e0';
-    return `<div class="timeline-bar"><span class="timeline-month">${m.label}</span>
-      <div class="timeline-track"><div class="timeline-fill" style="width:${pct}%;background:${col}">${m.acc>=15?m.acc:''}</div></div>
-      <span class="timeline-val">${m.pause?'pausa':'+'+m.added}</span></div>`;
-  }).join('');
-
-  // Evolution: realizado vs projetado
-  document.getElementById('pr-evolution').innerHTML=sched.map(m=>{
-    const pct=m.acc/180*100;
-    return `<div class="timeline-bar"><span class="timeline-month">${m.label}</span>
-      <div class="timeline-track"><div class="timeline-fill" style="width:${pct}%;background:linear-gradient(90deg,#22c5e0,#9b7ff5)">${pct.toFixed(0)}%</div></div>
-      <span class="timeline-val">${m.acc}/180</span></div>`;
-  }).join('');
 }
 
 function buildSchedule(){
-  // Start: já temos 68 em agosto/2026 (retorno das visitas). 15 zonas/mês.
-  // Pausa eleitoral: ~15 dias antes do 1º turno (outubro) → retorno ~1 semana após 2º turno.
-  // Eleições municipais: out/2026 não há (foi 2024); próximas gerais 2026 (out). Consideramos pausa em out/2026.
-  const months=['Ago/26','Set/26','Out/26','Nov/26','Dez/26','Jan/27','Fev/27','Mar/27','Abr/27','Mai/27','Jun/27'];
-  let acc=68; const out=[];
-  months.forEach((label,idx)=>{
-    let added=0, pause=false;
-    if(label==='Out/26'){ pause=true; added=7; } // parcial antes da pausa
-    else if(label==='Nov/26'){ added=8; }          // retorno parcial
-    else { added=ZONAS_POR_MES; }
-    if(idx===0){ added=0; } // agosto = ponto de partida (68 já feitas)
-    acc=Math.min(acc+added,180);
-    out.push({label,added,acc,pause});
-    if(acc>=180) { /* keep going to show 100% */ }
-  });
+  // Data de referência: início em agosto/2026, 15 zonas/mês
+  // Ponto de partida: 68 zonas já avaliadas
+  const startYear=2026, startMonth=7; // agosto = mês 7 (0-indexed)
+  const months=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  let acc=DB.length; const out=[]; let y=startYear, m=startMonth;
+  while(acc < TOTAL_ZONAS_BA){
+    const label = `${months[m]}/${String(y).slice(2)}`;
+    const isFirst = (y===startYear && m===startMonth);
+    const added = isFirst ? 0 : Math.min(ZONAS_POR_MES, TOTAL_ZONAS_BA-acc);
+    acc = Math.min(acc+added, TOTAL_ZONAS_BA);
+    out.push({ label, added, acc });
+    m++; if(m>11){ m=0; y++; }
+    if(out.length>18) break; // segurança
+  }
   return out;
 }
 
-// ── SIDEBAR/TOPBAR SEARCH ──
-function setFilter(city){
-  activeFilter = city===activeFilter ? 'all' : city;
-  document.getElementById('city-search').value = activeFilter==='all'?'':activeFilter;
-  renderActiveView();
+function renderProjecoes(){
+  const proj = computeProjections().sort((a,b) => b.projection-a.projection);
+  const totalProj = proj.reduce((a,p) => a+p.projection, 0);
+  const coverPct  = (DB.length/TOTAL_ZONAS_BA*100).toFixed(1);
+
+  document.getElementById('pr-aval').textContent      = DB.length;
+  document.getElementById('pr-rest').textContent      = TOTAL_ZONAS_BA - DB.length;
+  document.getElementById('pr-total-proj').textContent = totalProj.toLocaleString('pt-BR');
+  document.getElementById('proj-intro').innerHTML     = `Projeção estatística para as <strong style="color:var(--cyan)">${TOTAL_ZONAS_BA} zonas</strong> da Bahia. Atualmente <strong style="color:var(--cyan)">${DB.length} avaliadas (${coverPct}%)</strong>. Método: média por zona, desvio-padrão e IC 95% com correção de população finita.`;
+
+  document.getElementById('pr-table-body').innerHTML = proj.filter(p=>p.obs>0).map(p=>`
+    <tr>
+      <td style="font-weight:500">${p.name}</td>
+      <td style="text-align:center;font-family:'JetBrains Mono',monospace">${p.obs}</td>
+      <td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--text-bright)">${p.mean.toFixed(2)}</td>
+      <td style="text-align:center;font-family:'JetBrains Mono',monospace;color:var(--muted)">${p.sd.toFixed(2)}</td>
+      <td style="text-align:center"><span class="proj-highlight">${p.projection}</span></td>
+      <td style="text-align:center"><span class="proj-ci">${p.low} – ${p.high}</span></td>
+    </tr>`).join('');
+
+  const items = proj.filter(p=>p.projection>0).slice(0,12).map(p=>({v:p.projection,c:COLORS[p.i],label:p.short,i:p.i}));
+  document.getElementById('pr-proj-bars').innerHTML = items.map((it,idx) => `
+    <div class="bar-item">
+      <span class="bar-rank">${idx+1}</span>
+      <span class="bar-label" style="color:${it.c}" onclick="goToEquip(${it.i})">${it.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${(it.v/(items[0]?.v||1)*100).toFixed(1)}%;background:${it.c};opacity:0.85"></div></div>
+      <span class="bar-val" style="color:${it.c}">${it.v}</span>
+      <span class="bar-pct" style="color:${it.c};opacity:0.78">${(it.v/totalProj*100).toFixed(1)}%</span>
+    </div>`).join('');
+
+  // Cronograma único — acumulado + adições por mês
+  const sched = buildSchedule();
+  document.getElementById('pr-timeline').innerHTML = sched.map(m => {
+    const pct = m.acc/TOTAL_ZONAS_BA*100;
+    const col = m.acc>=TOTAL_ZONAS_BA?'#34c97e':'#22c5e0';
+    const label = m.added===0 ? `ponto de partida (${m.acc})` : `+${m.added} → ${m.acc}/${TOTAL_ZONAS_BA}`;
+    return `<div class="timeline-bar">
+      <span class="timeline-month">${m.label}</span>
+      <div class="timeline-track">
+        <div class="timeline-fill" style="width:${pct.toFixed(1)}%;background:${col}">
+          ${pct>=18?`${pct.toFixed(0)}%`:''}
+        </div>
+      </div>
+      <span class="timeline-val" style="color:${col};font-size:10px">${label}</span>
+    </div>`;
+  }).join('');
 }
-function clearFilter(){
-  activeFilter='all'; activeEqIdx=-1;
-  document.getElementById('city-search').value='';
-  document.getElementById('zone-search').value='';
-  renderActiveView();
-}
 
-// city autocomplete search
-document.getElementById('city-search').addEventListener('input', function(){
-  const q=this.value.trim().toLowerCase();
-  if(!q){ activeFilter='all'; renderActiveView(); return; }
-  const cities=[...new Set(DB.map(r=>r.cidade))];
-  const match=cities.find(c=>c.toLowerCase()===q) || cities.find(c=>c.toLowerCase().startsWith(q)) || cities.find(c=>c.toLowerCase().includes(q));
-  if(match){ activeFilter=match; renderActiveView(); }
-});
-// zone search
-document.getElementById('zone-search').addEventListener('input', function(){
-  const q=this.value.trim();
-  if(!q){ activeFilter='all'; renderActiveView(); return; }
-  const zn=parseInt(q);
-  const match=DB.find(r=>r.zona===zn);
-  if(match){
-    activeFilter=match.cidade;
-    document.getElementById('city-search').value=match.cidade;
-    renderActiveView();
-  }
-});
-
-// ── INIT ──
-renderShared();
-renderGeral();
-
-// ════════════════════════════════════════════════════════════
-// GERADOR DE RELATÓRIO PDF
-// ════════════════════════════════════════════════════════════
+// ════ RELATÓRIO — Blob + createObjectURL ════
 function gerarRelatorio(){
-  const escopo=document.getElementById('r-escopo').value;
-  const refNum=document.getElementById('r-ref').value.trim();
-  const obs=document.getElementById('r-obs').value.trim();
-  const opt=id=>document.getElementById(id).checked;
-  const sResumo=opt('s-resumo'),sKpi=opt('s-kpi'),sPrio=opt('s-prio'),sEq=opt('s-eq'),sRank=opt('s-rank'),sCity=opt('s-city'),sZone=opt('s-zone'),sListEq=opt('s-listeq'),sProj=opt('s-proj');
+  const escopo = document.getElementById('r-escopo').value;
+  const refNum = document.getElementById('r-ref').value.trim();
+  const obs    = document.getElementById('r-obs').value.trim();
+  const opt    = id => document.getElementById(id).checked;
 
-  // dataset
-  let rDB=DB;
-  const allS=computeStats(DB);
-  const allCity=cityArrFrom(allS);
-  if(escopo==='current') rDB=getFiltered();
-  if(escopo==='alta')  rDB=DB.filter(r=>allCity.find(c=>c.n===r.cidade&&c.t>=20));
-  if(escopo==='media') rDB=DB.filter(r=>allCity.find(c=>c.n===r.cidade&&c.t>=8&&c.t<20));
-  if(escopo==='baixa') rDB=DB.filter(r=>allCity.find(c=>c.n===r.cidade&&c.t>0&&c.t<8));
+  let rDB = DB;
+  const allS    = computeStats(DB);
+  const allCity = cityArrFrom(allS);
+  if(escopo==='current') rDB = getFiltered();
+  if(escopo==='alta')    rDB = DB.filter(r => allCity.find(c=>c.n===r.cidade&&c.t>=20));
+  if(escopo==='media')   rDB = DB.filter(r => allCity.find(c=>c.n===r.cidade&&c.t>=8&&c.t<20));
+  if(escopo==='baixa')   rDB = DB.filter(r => allCity.find(c=>c.n===r.cidade&&c.t>0&&c.t<8));
 
-  const s=computeStats(rDB);
-  const cArr=cityArrFrom(s);
-  const eqSorted=s.eqTotals.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0);
-  const alta=cArr.filter(c=>c.t>=20),media=cArr.filter(c=>c.t>=8&&c.t<20),baixa=cArr.filter(c=>c.t>0&&c.t<8);
-  const now=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
-  const hr=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  const scopeLabel={all:'Geral — todas as cidades',current:'Filtro atual',alta:'Prioridade Alta (≥20)',media:'Prioridade Média (8–19)',baixa:'Prioridade Baixa (1–7)'}[escopo];
+  const s      = computeStats(rDB);
+  const cArr   = cityArrFrom(s);
+  const eqSort = s.eqTotals.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0);
+  const alta   = cArr.filter(c=>c.t>=20), media=cArr.filter(c=>c.t>=8&&c.t<20), baixa=cArr.filter(c=>c.t>0&&c.t<8);
+  const now    = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const hr     = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const coverPct = (DB.length/TOTAL_ZONAS_BA*100).toFixed(1);
+  const scopeLabel = {all:'Todas as cidades',current:'Filtro atual',alta:'Prioridade Alta (≥20)',media:'Prioridade Média (8–19)',baixa:'Prioridade Baixa (1–7)'}[escopo];
 
   let sec='', n=0;
-  const num=()=>++n;
+  const num = () => ++n;
 
-  if(sResumo){
-    const top3=cArr.slice(0,3).map(c=>`${c.n} (${c.t})`).join(', ');
-    sec+=`<div class="sec"><h2>${num()}. Resumo Executivo</h2>
+  if(opt('s-resumo')){
+    const top3 = cArr.slice(0,3).map(c=>`${c.n} (${c.t})`).join(', ');
+    sec += `<div class="sec"><h2>${num()}. Resumo Executivo</h2>
       <p>O presente relatório consolida o levantamento de necessidades de equipamentos ergonômicos das zonas eleitorais do interior da Bahia, realizado no âmbito do Projeto de Adequação Ergonômica do TRE-BA.</p>
-      <p>Foram avaliadas <strong>${rDB.length} zonas eleitorais</strong> em <strong>${s.cityCount} municípios</strong>, totalizando <strong>${s.grand} unidades</strong> de equipamentos distribuídas em ${eqSorted.length} categorias. O item de maior demanda é <strong>${EQ_FULL[s.topIdx]}</strong>, com ${s.eqTotals[s.topIdx]} unidades (${(s.eqTotals[s.topIdx]/s.grand*100).toFixed(1)}% do total).</p>
-      <p>Municípios prioritários: ${top3}. Classificação: <strong>${alta.length}</strong> de alta prioridade, <strong>${media.length}</strong> de média e <strong>${baixa.length}</strong> de baixa. A cobertura atual corresponde a 37,8% das 180 zonas eleitorais da Bahia.</p></div>`;
+      <p>Foram avaliadas <strong>${rDB.length} zonas eleitorais</strong> em <strong>${s.cityCount} municípios</strong>, totalizando <strong>${s.grand} unidades</strong> em ${eqSort.length} categorias. Item de maior demanda: <strong>${EQ_FULL[s.topIdx]}</strong>, com ${s.eqTotals[s.topIdx]} unidades (${(s.eqTotals[s.topIdx]/s.grand*100).toFixed(1)}% do total).</p>
+      <p>Municípios prioritários: ${top3}. Distribuição: <strong>${alta.length}</strong> de alta prioridade, <strong>${media.length}</strong> de média e <strong>${baixa.length}</strong> de baixa. Cobertura atual: ${coverPct}% das ${TOTAL_ZONAS_BA} zonas da Bahia.</p>
+    </div>`;
   }
-
-  if(sKpi){
-    const multiCount=Object.values(s.cities).filter(c=>c.zonas.length>1).length;
-    sec+=`<div class="sec"><h2>${num()}. Indicadores Gerais</h2>
+  if(opt('s-kpi')){
+    sec += `<div class="sec"><h2>${num()}. Indicadores Gerais</h2>
       <div class="kpi-row">
         <div class="kbox"><div class="kn">${rDB.length}</div><div class="kl">Zonas Avaliadas</div></div>
         <div class="kbox"><div class="kn">${s.cityCount}</div><div class="kl">Cidades</div></div>
         <div class="kbox"><div class="kn">${s.grand}</div><div class="kl">Total Itens</div></div>
-        <div class="kbox"><div class="kn">${eqSorted.length}</div><div class="kl">Categorias</div></div>
-        <div class="kbox"><div class="kn">${multiCount}</div><div class="kl">Multizona</div></div>
-      </div></div>`;
+        <div class="kbox"><div class="kn">${eqSort.length}</div><div class="kl">Categorias</div></div>
+        <div class="kbox"><div class="kn">${coverPct}%</div><div class="kl">Cobertura BA</div></div>
+      </div>
+    </div>`;
   }
-
-  if(sPrio){
-    sec+=`<div class="sec"><h2>${num()}. Painel de Prioridades</h2>
-      <p>Classificação por volume total de equipamentos demandados por município.</p>
+  if(opt('s-prio')){
+    sec += `<div class="sec"><h2>${num()}. Painel de Prioridades</h2>
+      <p>Classificação por volume de equipamentos por município.</p>
       <div class="prio3">
         <div class="pb alta"><div class="pb-title">ALTA · ≥20 itens</div><div class="pb-range">${alta.length} cidades</div>${alta.map(c=>`<div class="pb-row"><span>${c.n}</span><strong>${c.t}</strong></div>`).join('')}</div>
         <div class="pb media"><div class="pb-title">MÉDIA · 8–19 itens</div><div class="pb-range">${media.length} cidades</div>${media.map(c=>`<div class="pb-row"><span>${c.n}</span><strong>${c.t}</strong></div>`).join('')}</div>
         <div class="pb baixa"><div class="pb-title">BAIXA · 1–7 itens</div><div class="pb-range">${baixa.length} cidades</div>${baixa.map(c=>`<div class="pb-row"><span>${c.n}</span><strong>${c.t}</strong></div>`).join('')}</div>
-      </div></div>`;
+      </div>
+    </div>`;
   }
-
-  if(sEq){
-    sec+=`<div class="sec"><h2>${num()}. Ranking de Equipamentos</h2>
+  if(opt('s-eq')){
+    sec += `<div class="sec"><h2>${num()}. Ranking de Equipamentos</h2>
       <table><thead><tr><th>#</th><th>Equipamento</th><th>Qtde</th><th>% Total</th></tr></thead><tbody>
-      ${eqSorted.map(({i,v},ri)=>`<tr class="${ri%2?'':'even'}"><td>${ri+1}º</td><td>${EQ_FULL[i]}</td><td style="text-align:center;font-weight:700">${v}</td><td style="text-align:center">${(v/s.grand*100).toFixed(1)}%</td></tr>`).join('')}
-      </tbody></table></div>`;
+      ${eqSort.map(({i,v},ri)=>`<tr class="${ri%2?'':'even'}"><td>${ri+1}º</td><td>${EQ_FULL[i]}</td><td style="text-align:center;font-weight:700">${v}</td><td style="text-align:center">${(v/s.grand*100).toFixed(1)}%</td></tr>`).join('')}
+      </tbody></table>
+    </div>`;
   }
-
-  if(sRank){
-    sec+=`<div class="sec"><h2>${num()}. Ranking de Municípios</h2>
+  if(opt('s-rank')){
+    sec += `<div class="sec" style="page-break-before:always"><h2>${num()}. Ranking de Municípios</h2>
       <table><thead><tr><th>#</th><th>Município</th><th>Zonas</th><th>Total</th><th>%</th><th>Prioridade</th></tr></thead><tbody>
-      ${cArr.map((c,i)=>{const z=c.zonas.filter(x=>x>0).sort((a,b)=>a-b).join(', ')||'—';const p=prioOf(c.t);const pc={'ALTA':'#b91c1c','MÉDIA':'#b45309','BAIXA':'#166534','—':'#888'}[p[0]];return `<tr class="${i%2?'':'even'}"><td style="text-align:center">${i+1}º</td><td>${c.n}</td><td style="font-size:9px;color:#555">${z}</td><td style="text-align:center;font-weight:700">${c.t}</td><td style="text-align:center">${(c.t/s.grand*100).toFixed(1)}%</td><td style="text-align:center;color:${pc};font-weight:700">${p[0]}</td></tr>`;}).join('')}
-      </tbody></table></div>`;
+      ${cArr.map((c,i)=>{const z=c.zonas.filter(x=>x>0).sort((a,b)=>a-b).join(', ')||'—';const p=prioOf(c.t);const pc={'ALTA':'#b91c1c','MÉDIA':'#b45309','BAIXA':'#166534','—':'#888'}[p[0]];return `<tr class="${i%2?'':'even'}"><td style="text-align:center">${i+1}º</td><td>${c.n}</td><td style="font-size:9px;color:#555">${z}</td><td style="text-align:center;font-weight:700">${c.t}</td><td style="text-align:center">${(c.t/s.grand*100).toFixed(1)}%</td><td style="color:${pc};font-weight:700;text-align:center">${p[0]}</td></tr>`;}).join('')}
+      </tbody></table>
+    </div>`;
   }
-
-  if(sCity){
-    sec+=`<div class="sec" style="page-break-before:always"><h2>${num()}. Consolidado por Cidade</h2>
-      <p>Cidades com mais de uma zona tiveram seus equipamentos somados. O número da zona é o identificador único do cartório.</p>
-      <table><thead><tr><th>#</th><th>Cidade</th><th>Zonas Eleitorais</th><th>Total</th><th>%</th></tr></thead><tbody>
-      ${cArr.map((c,i)=>{const z=c.zonas.filter(x=>x>0).sort((a,b)=>a-b).join(', ')||'—';return `<tr class="${i%2?'':'even'}"><td style="text-align:center">${i+1}º</td><td>${c.n}</td><td style="font-size:9px;color:#555">${z}</td><td style="text-align:center;font-weight:700">${c.t}</td><td style="text-align:center">${(c.t/s.grand*100).toFixed(1)}%</td></tr>`;}).join('')}
-      </tbody></table></div>`;
+  if(opt('s-zone')){
+    const zSorted = [...rDB].sort((a,b)=>b.equip.reduce((s,v)=>s+v,0)-a.equip.reduce((s,v)=>s+v,0));
+    sec += `<div class="sec" style="page-break-before:always"><h2>${num()}. Detalhamento por Zona</h2>
+      <table><thead><tr><th>Zona</th><th>Município</th><th>Equipamentos</th><th>Total</th></tr></thead><tbody>
+      ${zSorted.map((r,ri)=>{const tot=r.equip.reduce((a,b)=>a+b,0);const eqTxt=r.equip.map((v,i)=>v>0?`${EQ_SHORT[i]} (${v})`:'').filter(Boolean).join(', ')||'—';return `<tr class="${ri%2?'':'even'}"><td style="font-weight:700">${r.zona}</td><td>${r.cidade}</td><td style="font-size:9px">${eqTxt}</td><td style="text-align:center;font-weight:700">${tot}</td></tr>`;}).join('')}
+      </tbody></table>
+    </div>`;
   }
-
-  if(sListEq){
-    sec+=`<div class="sec" style="page-break-before:always"><h2>${num()}. Listagem por Equipamento</h2>
-      <p>Para cada equipamento, ranking das cidades que mais solicitaram, com total, municípios e zonas atendidas.</p>`;
-    eqSorted.forEach(({i,v})=>{
-      const cityList=Object.entries(s.cities).map(([nm,d])=>({n:nm,t:d.totals[i],zonas:d.zonas})).filter(c=>c.t>0).sort((a,b)=>b.t-a.t);
-      const totalZonas=rDB.filter(r=>r.equip[i]>0).length;
-      sec+=`<div style="margin-bottom:14px;break-inside:avoid">
-        <div style="font-size:11px;font-weight:800;color:#1e3a5f;margin-bottom:4px;border-bottom:1px solid #dde5f0;padding-bottom:3px">${EQ_FULL[i]} <span style="font-weight:400;color:#777;font-size:9px">· ${v} unidades · ${cityList.length} municípios · ${totalZonas} zonas</span></div>
+  if(opt('s-listeq')){
+    sec += `<div class="sec" style="page-break-before:always"><h2>${num()}. Listagem por Equipamento</h2>`;
+    eqSort.forEach(({i,v}) => {
+      const cityList = Object.entries(s.cities).map(([nm,d])=>({n:nm,t:d.totals[i]})).filter(c=>c.t>0).sort((a,b)=>b.t-a.t);
+      sec += `<div style="margin-bottom:16px;break-inside:avoid">
+        <div style="font-size:11px;font-weight:800;color:#1e3a5f;margin-bottom:4px;border-bottom:1px solid #dde5f0;padding-bottom:3px">${EQ_FULL[i]} <span style="font-weight:400;color:#777;font-size:9px">· ${v} unidades · ${cityList.length} municípios</span></div>
         <table style="margin-bottom:4px"><tbody>
-        ${cityList.slice(0,8).map((c,ri)=>`<tr class="${ri%2?'':'even'}"><td style="width:30px;text-align:center;color:#555">${ri+1}º</td><td>${c.n}</td><td style="width:60px;text-align:right;font-weight:700">${c.t} un.</td></tr>`).join('')}
+        ${cityList.slice(0,8).map((c,ri)=>`<tr class="${ri%2?'':'even'}"><td style="width:24px;text-align:center;color:#555">${ri+1}º</td><td>${c.n}</td><td style="width:60px;text-align:right;font-weight:700">${c.t} un.</td></tr>`).join('')}
         ${cityList.length>8?`<tr><td colspan="3" style="font-size:9px;color:#888;font-style:italic">+ ${cityList.length-8} outros municípios</td></tr>`:''}
         </tbody></table></div>`;
     });
-    sec+=`</div>`;
+    sec += `</div>`;
   }
-
-  if(sProj){
-    const proj=computeProjections().sort((a,b)=>b.projection-a.projection).filter(p=>p.obs>0);
-    const totalProj=proj.reduce((a,p)=>a+p.projection,0);
-    sec+=`<div class="sec" style="page-break-before:always"><h2>${num()}. Estimativas e Projeções</h2>
-      <p>Projeção estatística para as 180 zonas eleitorais da Bahia (68 avaliadas, 37,8%). Método proporcional com intervalo de confiança de 95%. Demanda total projetada ao final: <strong>${totalProj.toLocaleString('pt-BR')} unidades</strong>.</p>
-      <table><thead><tr><th>Equipamento</th><th>Observado</th><th>Média/zona</th><th>Projeção 180</th><th>Intervalo (IC 95%)</th></tr></thead><tbody>
-      ${proj.map((p,ri)=>`<tr class="${ri%2?'':'even'}"><td>${p.name}</td><td style="text-align:center">${p.obs}</td><td style="text-align:center">${p.mean.toFixed(2)}</td><td style="text-align:center;font-weight:700;color:#1e3a5f">${p.projection}</td><td style="text-align:center;color:#555">${p.low} – ${p.high}</td></tr>`).join('')}
+  if(opt('s-proj')){
+    const projData = computeProjections().sort((a,b)=>b.projection-a.projection).filter(p=>p.obs>0);
+    const totalP   = projData.reduce((a,p)=>a+p.projection,0);
+    sec += `<div class="sec" style="page-break-before:always"><h2>${num()}. Estimativas e Projeções</h2>
+      <p>Projeção para ${TOTAL_ZONAS_BA} zonas (${DB.length} avaliadas, ${coverPct}%). Demanda total projetada: <strong>${totalP.toLocaleString('pt-BR')} unidades</strong>.</p>
+      <table><thead><tr><th>Equipamento</th><th>Observado</th><th>Média/zona</th><th>Projeção ${TOTAL_ZONAS_BA}</th><th>IC 95%</th></tr></thead><tbody>
+      ${projData.map((p,ri)=>`<tr class="${ri%2?'':'even'}"><td>${p.name}</td><td style="text-align:center">${p.obs}</td><td style="text-align:center">${p.mean.toFixed(2)}</td><td style="text-align:center;font-weight:700;color:#1e3a5f">${p.projection}</td><td style="text-align:center;color:#555">${p.low} – ${p.high}</td></tr>`).join('')}
       </tbody></table>
-      <p style="margin-top:8px;font-size:9px;color:#777">Cronograma: retorno das visitas em agosto/2026, ritmo de 15 zonas/mês, com pausa no período eleitoral. Conclusão estimada conforme evolução acumulada.</p></div>`;
+    </div>`;
   }
+  if(obs) sec += `<div class="sec"><h2>Observações</h2><p>${obs}</p></div>`;
 
-  if(obs){ sec+=`<div class="sec"><h2>Observações</h2><p>${obs}</p></div>`; }
-
-  const doc=`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Relatório Ergonomia Interior – TRE-BA</title>
+  const doc = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Relatório Ergonomia Interior – TRE-BA</title>
 <style>
 @page{margin:2cm 2cm 2.5cm 2cm;size:A4;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -1102,7 +1094,7 @@ body{font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#1a1a2e;backgro
 .sec p{font-size:10px;color:#2a2a3e;margin-bottom:8px;text-align:justify;}
 .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;}
 .kbox{border:1px solid #dde5f0;border-radius:7px;padding:12px 8px;text-align:center;background:#f5f8fd;}
-.kn{font-size:24px;font-weight:900;color:#1e3a5f;font-family:monospace;line-height:1;}
+.kn{font-size:22px;font-weight:900;color:#1e3a5f;font-family:monospace;line-height:1;}
 .kl{font-size:8.5px;color:#555;text-transform:uppercase;letter-spacing:0.5px;margin-top:5px;line-height:1.3;}
 table{width:100%;border-collapse:collapse;margin-bottom:10px;}
 thead tr{background:#1e3a5f;color:#fff;}
@@ -1116,24 +1108,44 @@ tr.even td{background:#f5f8fd;}
 .pb.baixa{border-color:#86efac;background:#f0fdf4;}
 .pb-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;}
 .pb.alta .pb-title{color:#b91c1c;}.pb.media .pb-title{color:#b45309;}.pb.baixa .pb-title{color:#166534;}
-.pb-range{font-size:8.5px;color:#777;margin-bottom:10px;}
+.pb-range{font-size:8.5px;color:#777;margin-bottom:8px;}
 .pb-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.05);font-size:9px;color:#333;}
 .doc-footer{margin-top:24px;border-top:1px solid #dde5f0;padding-top:8px;display:flex;justify-content:space-between;font-size:8px;color:#999;}
 @media print{.sec{page-break-inside:avoid;}}
 </style></head><body>
 <div class="doc-header">
-  <div class="dh-brand"><h1>ERGONOMIA INTERIOR</h1><div class="sub">TRE-BA · SEGEP/COMAP/SGA</div><div class="scope">Relatório Consolidado — ${scopeLabel}</div>${refNum?`<div style="font-size:9px;color:#555;margin-top:4px">Ref.: ${refNum}</div>`:''}</div>
-  <div class="dh-meta"><strong>Emitido:</strong> ${now} às ${hr}<br><strong>Zonas:</strong> ${rDB.length} | <strong>Cidades:</strong> ${s.cityCount}<br><strong>Total itens:</strong> ${s.grand}<br><strong>Fonte:</strong> base_original_interior.xlsx</div>
+  <div class="dh-brand">
+    <h1>ERGONOMIA INTERIOR</h1>
+    <div class="sub">TRE-BA · SEGEP/COMAP/SGA</div>
+    <div class="scope">Relatório Consolidado — ${scopeLabel}</div>
+    ${refNum?`<div style="font-size:9px;color:#555;margin-top:4px">Ref.: ${refNum}</div>`:''}
+  </div>
+  <div class="dh-meta">
+    <strong>Emitido:</strong> ${now} às ${hr}<br>
+    <strong>Zonas:</strong> ${rDB.length} | <strong>Cidades:</strong> ${s.cityCount}<br>
+    <strong>Total itens:</strong> ${s.grand}<br>
+    <strong>Fonte:</strong> base_original_interior.xlsx
+  </div>
 </div>
 ${sec}
-<div class="doc-footer"><span>TRE-BA · Tribunal Regional Eleitoral da Bahia · SEGEP/COMAP/SGA</span><span>Ergonomia Interior · ${now}</span></div>
+<div class="doc-footer">
+  <span>TRE-BA · Tribunal Regional Eleitoral da Bahia · SEGEP/COMAP/SGA</span>
+  <span>Ergonomia Interior · ${now}</span>
+</div>
 <script>window.onload=function(){window.print();};<\/script>
 </body></html>`;
 
-  const w=window.open('','_blank');
-  if(!w){ alert('Permita pop-ups para gerar o relatório.'); return; }
-  w.document.write(doc); w.document.close();
+  // ── Blob + createObjectURL — nunca window.open direto ──
+  const blob = new Blob([doc], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.target = '_blank'; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
+
+// ── INIT ──
+renderShared();
+renderGeral();
 </script>
 </body>
 </html>
